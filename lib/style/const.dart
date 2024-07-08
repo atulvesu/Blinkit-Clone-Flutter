@@ -23,7 +23,6 @@ const skipStyle = TextStyle(
   fontSize: 10,
 );
 // App bar
-
 const apptitleStyle = TextStyle(
     fontFamily: 'NunitoSans', fontSize: 16, fontWeight: FontWeight.w500);
 // otp screen
@@ -54,13 +53,19 @@ const hinttxtStyle = TextStyle(
 
 const bstSellerStyle = TextStyle(
   fontFamily: 'Poppins-Regular',
-  fontSize: 14,
+  fontSize: 12,
 );
 
 const bstSeller2Style = TextStyle(
   fontFamily: 'Poppins-Regular',
-  fontSize: 12,
+  fontSize: 10,
 );
 
 const seeAllbtn =
     TextStyle(fontFamily: 'Poppins-Regular', fontSize: 12, color: Colors.green);
+
+const oldPrice = TextStyle(
+    decoration: TextDecoration.lineThrough,
+    fontFamily: 'Poppins-Regular',
+    fontSize: 12,
+    color: Colors.grey);

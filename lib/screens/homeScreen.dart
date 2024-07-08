@@ -1,4 +1,6 @@
 import 'dart:math';
+import 'package:blinkit/model/grocery_model.dart';
+import 'package:blinkit/screens/custom_grid.dart';
 import 'package:flutter/material.dart';
 import 'package:blinkit/style/const.dart';
 
@@ -43,6 +45,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       scrollDirection: Axis.horizontal,
                       itemCount: 6,
                       itemBuilder: (context, index) => Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5)),
                         padding:
                             EdgeInsets.symmetric(horizontal: 2, vertical: 5),
                         child: Column(
@@ -66,35 +70,36 @@ class _HomeScreenState extends State<HomeScreen> {
                               height: 10,
                             ),
                             Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 2),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    border: Border.all(
-                                        color: Colors.green.shade200)),
-                                child: Text(
-                                  'See all',
-                                  style: seeAllbtn,
-                                ))
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 2),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  border:
+                                      Border.all(color: Colors.green.shade200)),
+                              child: Text(
+                                'See all',
+                                style: seeAllbtn,
+                              ),
+                            )
                           ],
                         ),
                       ),
                     ),
                   ),
+                  CustomGrid(
+                    items: GroceryModel.dummyData,
+                    title: 'Grocery & Kitchen',
+                  )
                 ],
               ),
             ),
-            SliverToBoxAdapter(
-              child: Container(
-                height: 500,
-              ),
-            )
           ],
         ),
       ),
     );
   }
 }
+// -----------------------Ends -------------------------------//
 
 class PersistentHeader extends StatelessWidget {
   const PersistentHeader({
@@ -127,8 +132,7 @@ class PersistentHeader extends StatelessWidget {
                       contentPadding: EdgeInsets.zero,
                       isDense: false,
                       hintText: 'Search something...',
-                      hintStyle:
-                          hinttxtStyle, // Adjust according to your styles
+                      hintStyle: hinttxtStyle,
                       border: OutlineInputBorder(
                         borderSide: BorderSide.none,
                       ),
@@ -167,18 +171,18 @@ class CustomAppBar extends StatelessWidget {
           children: [
             Text(
               'Delivery in ',
-              style: apptxt1, // Adjust according to your styles
+              style: apptxt1,
             ),
             SizedBox(height: 4),
             Text(
               '11 minutes',
-              style: apptxt2, // Adjust according to your styles
+              style: apptxt2,
             ),
             Row(
               children: [
                 Text(
                   'E Block, Sector 8, Meerut Division',
-                  style: apptxt3, // Adjust according to your styles
+                  style: apptxt3,
                 ),
                 Icon(Icons.arrow_drop_down),
               ],
