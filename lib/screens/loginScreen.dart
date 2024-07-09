@@ -23,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: SingleChildScrollView(
                   physics: NeverScrollableScrollPhysics(),
                   child: Padding(
-                    padding: const EdgeInsets.all(5.0),
+                    padding: EdgeInsets.all(5.0),
                     child: Column(
                       children: [
                         Stack(
@@ -39,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   child: Card(
                                     elevation: 2,
                                     child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
+                                      padding: EdgeInsets.all(8.0),
                                       child: Text(
                                         'Skip Login',
                                         style: skipStyle,
@@ -132,8 +132,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.grey.shade500,
                               ),
-                              padding: const EdgeInsets.symmetric(vertical: 10),
-                              child: const Row(
+                              padding: EdgeInsets.symmetric(vertical: 10),
+                              child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Center(

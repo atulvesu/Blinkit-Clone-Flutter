@@ -1,20 +1,23 @@
+// ignore_for_file: file_names
+
+import 'package:blinkit/style/dimension.dart';
 import 'package:flutter/material.dart';
 import 'package:blinkit/style/const.dart';
+// ignore: unused_import
 import 'package:blinkit/model/grocery_model.dart';
 
 class NestedGridScreen extends StatelessWidget {
-  final GroceryModel groceryModel;
+  final dynamic model;
 
-  const NestedGridScreen({Key? key, required this.groceryModel})
-      : super(key: key);
+  NestedGridScreen({Key? key, required this.model}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          groceryModel.title,
-          style: TextStyle(fontSize: 12),
+          model.title,
+          style: TextStyle(fontSize: Dimensions.fontSize(12)),
         ),
       ),
       body: Column(
@@ -27,61 +30,79 @@ class NestedGridScreen extends StatelessWidget {
                 Expanded(
                   flex: 1,
                   child: ListView.builder(
-                    itemCount: 1,
+                    itemCount: model.subData.length,
                     itemBuilder: (context, index) {
-                      final product = groceryModel.subData[index];
+                      final product = model.subData[index];
                       return Container(
-                        decoration: BoxDecoration(
-                            border: Border(
-                                right:
-                                    BorderSide(color: Colors.green, width: 3))),
+                        decoration: const BoxDecoration(
+                          border: Border(
+                            right: BorderSide(color: Colors.green, width: 3),
+                          ),
+                        ),
                         child: Column(
                           children: [
                             ClipRRect(
                               borderRadius: BorderRadius.circular(100),
                               child: Image.network(
                                 product.img,
-                                width: 50,
-                                height: 50,
+                                width: Dimensions.width(50),
+                                height: Dimensions.height(50),
                                 fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) =>
+                                    const Icon(Icons.error),
+                                loadingBuilder:
+                                    (context, child, loadingProgress) {
+                                  if (loadingProgress == null) return child;
+                                  return Center(
+                                    child: CircularProgressIndicator(
+                                      value:
+                                          loadingProgress.expectedTotalBytes !=
+                                                  null
+                                              ? loadingProgress
+                                                      .cumulativeBytesLoaded /
+                                                  (loadingProgress
+                                                          .expectedTotalBytes ??
+                                                      1)
+                                              : null,
+                                    ),
+                                  );
+                                },
                               ),
                             ),
-                            const SizedBox(height: 5),
+                            SizedBox(height: Dimensions.height(5)),
                             Text(
-                                textAlign: TextAlign.center,
-                                groceryModel.title,
-                                style: bstSeller2Style),
-                            const SizedBox(height: 5),
+                              model.title,
+                              textAlign: TextAlign.center,
+                              style: bstSeller2Style,
+                            ),
+                            SizedBox(height: Dimensions.height(5)),
                           ],
                         ),
                       );
                     },
                   ),
                 ),
-
-                // Grid -----------------2-------------------//////////
                 Expanded(
                   flex: 4,
                   child: Container(
-                    decoration: BoxDecoration(
-                      color: const Color.fromRGBO(238, 238, 238, 1),
+                    decoration: const BoxDecoration(
+                      color: Color.fromRGBO(238, 238, 238, 1),
                     ),
                     child: Column(
                       children: [
                         Expanded(
                           child: GridView.builder(
-                            itemCount: groceryModel.subData.length,
+                            itemCount: model.subData.length,
                             gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
+                                const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2,
-                              childAspectRatio: 1 / 1.6,
-                              // crossAxisSpacing: 5,
+                              childAspectRatio: 1 / 1.7,
                               mainAxisSpacing: 5,
                             ),
                             itemBuilder: (context, index) {
-                              final product = groceryModel.subData[index];
+                              final product = model.subData[index];
                               return Padding(
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                     horizontal: 5, vertical: 10),
                                 child: Container(
                                   decoration: BoxDecoration(
@@ -94,44 +115,65 @@ class NestedGridScreen extends StatelessWidget {
                                     children: [
                                       ClipRRect(
                                         borderRadius: BorderRadius.circular(5),
-                                        //---------- product image ------------//
                                         child: Image.network(
                                           product.img,
                                           width: double.infinity,
-                                          height: 120,
+                                          height: Dimensions.height(120),
                                           fit: BoxFit.cover,
+                                          errorBuilder: (context, error,
+                                                  stackTrace) =>
+                                              const Icon(Icons
+                                                  .error), // Placeholder for error
+                                          loadingBuilder: (context, child,
+                                              loadingProgress) {
+                                            if (loadingProgress == null)
+                                              return child;
+                                            return Center(
+                                              child: CircularProgressIndicator(
+                                                value: loadingProgress
+                                                            .expectedTotalBytes !=
+                                                        null
+                                                    ? loadingProgress
+                                                            .cumulativeBytesLoaded /
+                                                        (loadingProgress
+                                                                .expectedTotalBytes ??
+                                                            1)
+                                                    : null,
+                                              ),
+                                            );
+                                          },
                                         ),
                                       ),
-                                      const SizedBox(height: 5),
-                                      // time
+                                      SizedBox(height: Dimensions.height(5)),
                                       Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 10, horizontal: 10),
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: Dimensions.padding(10),
+                                            horizontal: Dimensions.padding(10)),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
                                             Container(
-                                                padding: EdgeInsets.all(2),
-                                                decoration: BoxDecoration(
-                                                    color: Colors.grey.shade100,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            2)),
-                                                child: Text(
-                                                  '11 MINS',
-                                                  style: apptxt1,
-                                                )),
-                                            SizedBox(
-                                              height: 10,
+                                              padding: EdgeInsets.all(
+                                                  Dimensions.padding(2)),
+                                              decoration: BoxDecoration(
+                                                color: Colors.grey.shade100,
+                                                borderRadius:
+                                                    BorderRadius.circular(2),
+                                              ),
+                                              child: Text(
+                                                '11 MINS',
+                                                style: apptxt1,
+                                              ),
                                             ),
+                                            SizedBox(
+                                                height: Dimensions.height(10)),
                                             Text(
                                               product.name,
                                               style: bstSellerStyle,
                                             ),
                                             SizedBox(
-                                              height: 10,
-                                            ),
+                                                height: Dimensions.height(10)),
                                             Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment
@@ -144,22 +186,25 @@ class NestedGridScreen extends StatelessWidget {
                                                       style: bstSeller2Style,
                                                     ),
                                                     Text(
-                                                        '₹ ${product.oldPrice}',
-                                                        style: oldPrice),
+                                                      '₹ ${product.oldPrice}',
+                                                      style: oldPrice,
+                                                    ),
                                                   ],
                                                 ),
                                                 Container(
-                                                  padding: EdgeInsets.symmetric(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(
                                                       horizontal: 10,
                                                       vertical: 2),
                                                   decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      border: Border.all(
-                                                          color: Colors.green)),
-                                                  child: Text('Add'),
-                                                )
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    border: Border.all(
+                                                        color: Colors.green),
+                                                  ),
+                                                  child: const Text('Add'),
+                                                ),
                                               ],
                                             ),
                                           ],
@@ -200,8 +245,7 @@ class NestedGridScreen extends StatelessWidget {
           //                 borderRadius: BorderRadius.circular(5),
           //                 color: Colors.green,
           //               ),
-          //               padding:
-          //                   EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          //               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           //               child: Text(
           //                 textAlign: TextAlign.center,
           //                 'Next',

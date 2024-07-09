@@ -3,12 +3,14 @@ class GroceryModel {
   final String title;
   final int id;
   final List<Product> subData;
+  int cartQuantity;
 
   GroceryModel({
     required this.id,
     required this.img,
     required this.title,
     required this.subData,
+    this.cartQuantity = 0,
   });
 
   static List<GroceryModel> dummyData = [

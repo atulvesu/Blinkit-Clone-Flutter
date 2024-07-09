@@ -1,6 +1,10 @@
 import 'dart:math';
+import 'package:blinkit/model/bath_model.dart';
 import 'package:blinkit/model/grocery_model.dart';
+import 'package:blinkit/model/home_model.dart';
+import 'package:blinkit/model/snacks_model.dart';
 import 'package:blinkit/screens/custom_grid.dart';
+import 'package:blinkit/style/dimension.dart';
 import 'package:flutter/material.dart';
 import 'package:blinkit/style/const.dart';
 
@@ -15,18 +19,72 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.black,
+        shape: CircleBorder(),
+        onPressed: () {},
+        child: Padding(
+          padding: EdgeInsets.all(Dimensions.padding(4)),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.category,
+                color: Colors.white,
+              ),
+              SizedBox(
+                height: Dimensions.height(2),
+              ),
+              Text(
+                'CATEGORY',
+                style: TextStyle(
+                    fontSize: Dimensions.fontSize(6),
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500),
+              ),
+            ],
+          ),
+        ),
+      ),
+      // floatingActionButton: Container(
+      //   height: MediaQuery.of(context).size.width * 0.5,
+      //   width: MediaQuery.of(context).size.width * 0.14,
+      //   child: FloatingActionButton(
+      //     shape: CircleBorder(),
+      //     onPressed: () {},
+      //     child: Column(
+      //       mainAxisAlignment: MainAxisAlignment.center,
+      //       crossAxisAlignment: CrossAxisAlignment.center,
+      //       children: [
+      //         Icon(
+      //           Icons.category,
+      //           color: Colors.white,
+      //         ),
+      //         Text(
+      //           'CATEGORY',
+      //           style: TextStyle(
+      //               fontSize: 5,
+      //               color: Colors.white,
+      //               fontWeight: FontWeight.w500),
+      //         )
+      //       ],
+      //     ),
+      //   ),
+      // ),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
             CustomAppBar(),
-            const PersistentHeader(),
+            PersistentHeader(),
             SliverToBoxAdapter(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: Dimensions.padding(16)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -38,8 +96,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                   ),
-                  Container(
-                    height: 230,
+                  SizedBox(
+                    height: Dimensions.height(230),
                     child: ListView.builder(
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
@@ -89,7 +147,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   CustomGrid(
                     items: GroceryModel.dummyData,
                     title: 'Grocery & Kitchen',
-                  )
+                  ),
+                  CustomGrid(
+                    title: 'Snacks & Drinks',
+                    items: SnacksModel.dummyData,
+                  ),
+                  CustomGrid(
+                      title: 'Beauty & Personal Care',
+                      items: BathModel.dummyData),
+                  CustomGrid(
+                      title: 'HouseHold Essentials', items: HomeModel.dummyData)
                 ],
               ),
             ),
@@ -102,7 +169,7 @@ class _HomeScreenState extends State<HomeScreen> {
 // -----------------------Ends -------------------------------//
 
 class PersistentHeader extends StatelessWidget {
-  const PersistentHeader({
+  PersistentHeader({
     super.key,
   });
 
@@ -115,20 +182,20 @@ class PersistentHeader extends StatelessWidget {
         maxHeight: 60.0,
         child: Container(
           color: Colors.white,
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
+          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 7),
             decoration: BoxDecoration(
               color: Colors.grey.shade200,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Row(
               children: [
-                const Icon(Icons.search),
-                const SizedBox(width: 10),
+                Icon(Icons.search),
+                SizedBox(width: 10),
                 Expanded(
                   child: TextFormField(
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       contentPadding: EdgeInsets.zero,
                       isDense: false,
                       hintText: 'Search something...',
@@ -139,10 +206,10 @@ class PersistentHeader extends StatelessWidget {
                     ),
                   ),
                 ),
-                const VerticalDivider(thickness: 0.8),
+                VerticalDivider(thickness: 0.8),
                 InkWell(
                   onTap: () {},
-                  child: const Icon(Icons.mic),
+                  child: Icon(Icons.mic),
                 ),
               ],
             ),
@@ -162,7 +229,7 @@ class CustomAppBar extends StatelessWidget {
       automaticallyImplyLeading: false,
       expandedHeight: 100,
       collapsedHeight: 90,
-      flexibleSpace: const FlexibleSpaceBar(
+      flexibleSpace: FlexibleSpaceBar(
         titlePadding: EdgeInsets.symmetric(horizontal: 10),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
