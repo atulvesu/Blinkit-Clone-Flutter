@@ -1,4 +1,5 @@
 import 'package:blinkit/screens/WebViewScreen.dart';
+import 'package:blinkit/style/dimension.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:blinkit/provider/loginProvider.dart';
@@ -21,7 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               Expanded(
                 child: SingleChildScrollView(
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   child: Padding(
                     padding: EdgeInsets.all(5.0),
                     child: Column(
@@ -66,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             height: 70,
                           ),
                           SizedBox(
-                            height: 20,
+                            height: Dimensions.height(10),
                           ),
                           Text(
                             'India\'s last minute app',

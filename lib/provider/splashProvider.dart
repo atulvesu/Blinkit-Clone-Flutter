@@ -7,7 +7,7 @@ class SplashProvider extends ChangeNotifier {
   void nxtScreen(BuildContext context) {
     if (!_isNavigated) {
       _isNavigated = true;
-      Timer(Duration(seconds: 3), () {
+      Timer(const Duration(seconds: 3), () {
         Navigator.pushReplacementNamed(context, '/loginScreen');
       });
     }

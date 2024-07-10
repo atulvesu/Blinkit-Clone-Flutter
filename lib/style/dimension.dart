@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 class Dimensions {
   static double screenHeight = 0;
@@ -13,7 +13,8 @@ class Dimensions {
   }
 
   static double fontSize(double value) {
-    return (value / 812.0) * screenHeight;
+    double scale = (screenHeight < screenWidth) ? screenHeight : screenWidth;
+    return (value / 375.0) * scale;
   }
 
   static double padding(double value) {

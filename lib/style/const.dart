@@ -5,7 +5,9 @@ final loginHeadStyle =
     TextStyle(fontFamily: 'Poppins-Bold', fontSize: Dimensions.fontSize(20));
 
 final loginHead2Style = TextStyle(
-    fontFamily: 'Poppins-SemiBold', fontSize: Dimensions.fontSize(16));
+  fontFamily: 'Poppins-SemiBold',
+  fontSize: Dimensions.fontSize(16),
+);
 
 final loginInputStyle = TextStyle(
     fontFamily: 'Poppins-Regular',
@@ -18,6 +20,11 @@ final loginInput2Style =
 final btnStyle = TextStyle(
     fontFamily: 'Poppins-Bold',
     fontSize: Dimensions.fontSize(15),
+    color: Colors.white);
+
+final btnStyle2 = TextStyle(
+    fontFamily: 'Poppins-Bold',
+    fontSize: Dimensions.fontSize(12),
     color: Colors.white);
 
 final lastStyle =
@@ -86,3 +93,24 @@ final oldPrice = TextStyle(
     fontFamily: 'Poppins-Regular',
     fontSize: Dimensions.fontSize(12),
     color: Colors.grey);
+
+final btn2Style = TextStyle(
+  fontFamily: 'Poppins-Regular',
+  fontSize: Dimensions.fontSize(12),
+  color: Colors.white,
+);
+
+final cartStyle = TextStyle(
+  fontFamily: 'Poppins-Regular',
+  fontWeight: FontWeight.w600,
+  fontSize: Dimensions.fontSize(12),
+);
+
+final cartStyle2 = TextStyle(
+  fontFamily: 'Poppins-Regular',
+  fontWeight: FontWeight.w400,
+  fontSize: Dimensions.fontSize(10),
+);
+
+const textFormFieldStyle =
+    TextStyle(color: Colors.grey, fontSize: 12, fontFamily: 'Poppins-Regular');

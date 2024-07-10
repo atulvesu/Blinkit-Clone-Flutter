@@ -4,6 +4,7 @@ import 'package:blinkit/model/grocery_model.dart';
 import 'package:blinkit/model/home_model.dart';
 import 'package:blinkit/model/snacks_model.dart';
 import 'package:blinkit/screens/custom_grid.dart';
+import 'package:blinkit/screens/profileScreen.dart';
 import 'package:blinkit/style/dimension.dart';
 import 'package:flutter/material.dart';
 import 'package:blinkit/style/const.dart';
@@ -261,7 +262,13 @@ class CustomAppBar extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           child: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProfileScreen(),
+                  ));
+            },
             icon: const Icon(
               Icons.person_outline_sharp,
               size: 30,

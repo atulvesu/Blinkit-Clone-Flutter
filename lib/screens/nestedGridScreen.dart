@@ -1,22 +1,32 @@
-// ignore_for_file: file_names
-
-import 'package:blinkit/style/dimension.dart';
+import 'package:blinkit/screens/cartScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:blinkit/style/dimension.dart';
 import 'package:blinkit/style/const.dart';
-// ignore: unused_import
-import 'package:blinkit/model/grocery_model.dart';
 
-class NestedGridScreen extends StatelessWidget {
+class NestedGridScreen extends StatefulWidget {
   final dynamic model;
 
   NestedGridScreen({Key? key, required this.model}) : super(key: key);
+
+  @override
+  _NestedGridScreenState createState() => _NestedGridScreenState();
+}
+
+class _NestedGridScreenState extends State<NestedGridScreen> {
+  List<dynamic> cartItems = [];
+
+  void addToCart(product) {
+    setState(() {
+      cartItems.add(product);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          model.title,
+          widget.model.title,
           style: TextStyle(fontSize: Dimensions.fontSize(12)),
         ),
       ),
@@ -30,9 +40,9 @@ class NestedGridScreen extends StatelessWidget {
                 Expanded(
                   flex: 1,
                   child: ListView.builder(
-                    itemCount: model.subData.length,
+                    itemCount: widget.model.subData.length,
                     itemBuilder: (context, index) {
-                      final product = model.subData[index];
+                      final product = widget.model.subData[index];
                       return Container(
                         decoration: const BoxDecoration(
                           border: Border(
@@ -71,7 +81,7 @@ class NestedGridScreen extends StatelessWidget {
                             ),
                             SizedBox(height: Dimensions.height(5)),
                             Text(
-                              model.title,
+                              widget.model.title,
                               textAlign: TextAlign.center,
                               style: bstSeller2Style,
                             ),
@@ -92,7 +102,7 @@ class NestedGridScreen extends StatelessWidget {
                       children: [
                         Expanded(
                           child: GridView.builder(
-                            itemCount: model.subData.length,
+                            itemCount: widget.model.subData.length,
                             gridDelegate:
                                 const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2,
@@ -100,7 +110,7 @@ class NestedGridScreen extends StatelessWidget {
                               mainAxisSpacing: 5,
                             ),
                             itemBuilder: (context, index) {
-                              final product = model.subData[index];
+                              final product = widget.model.subData[index];
                               return Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 5, vertical: 10),
@@ -118,12 +128,11 @@ class NestedGridScreen extends StatelessWidget {
                                         child: Image.network(
                                           product.img,
                                           width: double.infinity,
-                                          height: Dimensions.height(120),
+                                          height: Dimensions.height(110),
                                           fit: BoxFit.cover,
-                                          errorBuilder: (context, error,
-                                                  stackTrace) =>
-                                              const Icon(Icons
-                                                  .error), // Placeholder for error
+                                          errorBuilder:
+                                              (context, error, stackTrace) =>
+                                                  const Icon(Icons.error),
                                           loadingBuilder: (context, child,
                                               loadingProgress) {
                                             if (loadingProgress == null)
@@ -191,19 +200,23 @@ class NestedGridScreen extends StatelessWidget {
                                                     ),
                                                   ],
                                                 ),
-                                                Container(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(
-                                                      horizontal: 10,
-                                                      vertical: 2),
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    border: Border.all(
-                                                        color: Colors.green),
+                                                GestureDetector(
+                                                  onTap: () =>
+                                                      addToCart(product),
+                                                  child: Container(
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                        horizontal: 10,
+                                                        vertical: 2),
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      border: Border.all(
+                                                          color: Colors.green),
+                                                    ),
+                                                    child: const Text('Add'),
                                                   ),
-                                                  child: const Text('Add'),
                                                 ),
                                               ],
                                             ),
@@ -225,37 +238,46 @@ class NestedGridScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 2),
-          // Container(
-          //   padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-          //   child: Row(
-          //     children: [
-          //       Expanded(
-          //           child: Text(
-          //         textAlign: TextAlign.center,
-          //         '2 ITEMS',
-          //         style: TextStyle(
-          //           fontSize: 14,
-          //         ),
-          //       )),
-          //       Expanded(
-          //         child: InkWell(
-          //           onTap: () {},
-          //           child: Container(
-          //               decoration: BoxDecoration(
-          //                 borderRadius: BorderRadius.circular(5),
-          //                 color: Colors.green,
-          //               ),
-          //               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-          //               child: Text(
-          //                 textAlign: TextAlign.center,
-          //                 'Next',
-          //                 style: TextStyle(color: Colors.white, fontSize: 14),
-          //               )),
-          //         ),
-          //       ),
-          //     ],
-          //   ),
-          // ),
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+            child: Row(
+              children: [
+                Expanded(
+                    child: Text(
+                  textAlign: TextAlign.center,
+                  '${cartItems.length} ITEMS',
+                  style: TextStyle(
+                    fontSize: 14,
+                  ),
+                )),
+                Expanded(
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              CartScreen(cartItems: cartItems),
+                        ),
+                      );
+                    },
+                    child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: Colors.green,
+                        ),
+                        padding:
+                            EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                        child: Text(
+                          textAlign: TextAlign.center,
+                          'Next',
+                          style: TextStyle(color: Colors.white, fontSize: 14),
+                        )),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
