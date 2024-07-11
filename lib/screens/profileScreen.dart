@@ -1,3 +1,5 @@
+import 'package:blinkit/screens/orderScreen.dart';
+import 'package:blinkit/screens/walletScreen.dart';
 import 'package:blinkit/style/dimension.dart';
 import 'package:flutter/material.dart';
 
@@ -60,17 +62,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  children: [
-                    Icon(Icons.wallet),
-                    Text('Wallet'),
-                  ],
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => WalletScreen(),
+                        ));
+                  },
+                  child: Column(
+                    children: [
+                      Icon(Icons.wallet),
+                      Text('Wallet'),
+                    ],
+                  ),
                 ),
-                Column(
-                  children: [
-                    Icon(Icons.wallet),
-                    Text('Support'),
-                  ],
+                InkWell(
+                  onTap: () {},
+                  child: Column(
+                    children: [
+                      Icon(Icons.wallet),
+                      Text('Support'),
+                    ],
+                  ),
                 ),
                 Column(
                   children: [
@@ -120,12 +134,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           child: Text('YOUR INFORMATION'),
         ),
-        ListTile(
-          leading: Icon(Icons.book),
-          title: Text('Your orders'),
-          trailing: Icon(
-            Icons.arrow_forward_ios_rounded,
-            size: 15,
+        InkWell(
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const OrderScreen()));
+          },
+          child: ListTile(
+            leading: Icon(Icons.book),
+            title: Text('Your orders'),
+            trailing: Icon(
+              Icons.arrow_forward_ios_rounded,
+              size: 15,
+            ),
           ),
         ),
         ListTile(

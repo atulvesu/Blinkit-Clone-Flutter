@@ -114,3 +114,6 @@ final cartStyle2 = TextStyle(
 
 const textFormFieldStyle =
     TextStyle(color: Colors.grey, fontSize: 12, fontFamily: 'Poppins-Regular');
+
+const orderStyle =
+    TextStyle(color: Colors.green, fontSize: 14, fontFamily: 'Poppins-Regular');

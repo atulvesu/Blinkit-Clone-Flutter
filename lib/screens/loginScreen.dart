@@ -13,6 +13,16 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  double _topPosition = 0;
+  double _leftPosition = 0;
+
+  void _moveImage() {
+    setState(() {
+      _topPosition = _topPosition == 0 ? 400 : 0;
+      _leftPosition = _leftPosition == 0 ? 400 : 0;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<loginProvider>(
@@ -29,27 +39,37 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         Stack(
                           children: [
-                            Image.asset('assets/images/cropped-blinkit2.png'),
+                            AnimatedContainer(
+                              duration: Duration(seconds: 10),
+                              margin: EdgeInsets.only(
+                                  top: _topPosition, left: _leftPosition),
+                              child: GestureDetector(
+                                onTap: _moveImage,
+                                child: Image.asset(
+                                    'assets/images/cropped-blinkit2.png'),
+                              ),
+                            ),
                             Positioned(
-                                right: 20,
-                                top: 10,
-                                child: InkWell(
-                                  onTap: () {
-                                    Navigator.pushNamed(context, '/homeScreen');
-                                  },
-                                  child: Card(
-                                    elevation: 2,
-                                    child: Padding(
-                                      padding: EdgeInsets.all(8.0),
-                                      child: Text(
-                                        'Skip Login',
-                                        style: skipStyle,
-                                      ),
+                              right: 20,
+                              top: 10,
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.pushNamed(context, '/homeScreen');
+                                },
+                                child: Card(
+                                  elevation: 2,
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text(
+                                      'Skip Login',
+                                      style: skipStyle,
                                     ),
                                   ),
-                                ))
+                                ),
+                              ),
+                            ),
                           ],
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -87,22 +107,20 @@ class _LoginScreenState extends State<LoginScreen> {
                             padding: EdgeInsets.symmetric(
                                 vertical: 5, horizontal: 5),
                             decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey),
-                                borderRadius: BorderRadius.circular(10)),
+                              border: Border.all(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                             child: Row(
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 5,
-                                  ),
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 5),
                                   child: Text(
                                     '+91',
                                     style: loginInput2Style,
                                   ),
                                 ),
-                                SizedBox(
-                                  width: 5,
-                                ),
+                                SizedBox(width: 5),
                                 Expanded(
                                   child: TextFormField(
                                     keyboardType: TextInputType.number,
@@ -121,9 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ],
                             ),
                           ),
-                          SizedBox(
-                            height: 10,
-                          ),
+                          SizedBox(height: 10),
                           InkWell(
                             onTap: () {
                               Navigator.pushNamed(context, '/otpScreen');
@@ -138,17 +154,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Center(
-                                      child: Text(
-                                    'Continue',
-                                    style: btnStyle,
-                                  )),
+                                    child: Text(
+                                      'Continue',
+                                      style: btnStyle,
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
                           ),
-                          SizedBox(
-                            height: 10,
-                          ),
+                          SizedBox(height: 10),
                         ],
                       ),
                     ),
@@ -173,7 +188,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => WebViewScreen(
-                                      url: 'https://blinkit.com/terms'),
+                                    url: 'https://blinkit.com/terms',
+                                  ),
                                 ),
                               );
                             },
@@ -191,8 +207,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => WebViewScreen(
-                                        url: 'https://blinkit.com/privacy')),
+                                  builder: (context) => WebViewScreen(
+                                    url: 'https://blinkit.com/privacy',
+                                  ),
+                                ),
                               );
                             },
                           ),
@@ -201,7 +219,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
