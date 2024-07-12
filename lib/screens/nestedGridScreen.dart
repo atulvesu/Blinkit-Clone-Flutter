@@ -1,5 +1,6 @@
-import 'package:blinkit/screens/cartScreen.dart';
+import 'package:blinkit/model/home_model.dart';
 import 'package:flutter/material.dart';
+import 'package:blinkit/screens/cartScreen.dart';
 import 'package:blinkit/style/dimension.dart';
 import 'package:blinkit/style/const.dart';
 
@@ -19,6 +20,75 @@ class _NestedGridScreenState extends State<NestedGridScreen> {
     setState(() {
       cartItems.add(product);
     });
+  }
+
+  void showProductDetails(product) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Container(
+          padding: EdgeInsets.all(Dimensions.padding(10)),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.network(
+                    product.img,
+                    width: Dimensions.width(100),
+                    height: Dimensions.height(100),
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) =>
+                        const Icon(Icons.error),
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return Center(
+                        child: CircularProgressIndicator(
+                          value: loadingProgress.expectedTotalBytes != null
+                              ? loadingProgress.cumulativeBytesLoaded /
+                                  (loadingProgress.expectedTotalBytes ?? 1)
+                              : null,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+              SizedBox(height: Dimensions.height(10)),
+              Text(
+                product.name,
+                style: bstSellerStyle,
+              ),
+              SizedBox(height: Dimensions.height(10)),
+              Text(
+                'Price: ₹${product.price.toString()}',
+                style: bstSeller2Style,
+              ),
+              SizedBox(height: Dimensions.height(10)),
+              Text(
+                'Old Price: ₹${product.oldPrice}',
+                style: oldPrice,
+              ),
+              // SizedBox(height: Dimensions.height(10)),
+              // Text(
+              //   'Description: ${product.description}',
+              //   style: TextStyle(fontSize: Dimensions.fontSize(12)),
+              // ),
+              SizedBox(height: Dimensions.height(10)),
+              ElevatedButton(
+                onPressed: () {
+                  addToCart(product);
+                  Navigator.pop(context);
+                },
+                child: Text('Add to Cart'),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -110,120 +180,129 @@ class _NestedGridScreenState extends State<NestedGridScreen> {
                               mainAxisSpacing: 5,
                             ),
                             itemBuilder: (context, index) {
-                              final product = widget.model.subData[index];
-                              return Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 5, vertical: 10),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: Colors.white,
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(5),
-                                        child: Image.network(
-                                          product.img,
-                                          width: double.infinity,
-                                          height: Dimensions.height(110),
-                                          fit: BoxFit.cover,
-                                          errorBuilder:
-                                              (context, error, stackTrace) =>
-                                                  const Icon(Icons.error),
-                                          loadingBuilder: (context, child,
-                                              loadingProgress) {
-                                            if (loadingProgress == null)
-                                              return child;
-                                            return Center(
-                                              child: CircularProgressIndicator(
-                                                value: loadingProgress
-                                                            .expectedTotalBytes !=
-                                                        null
-                                                    ? loadingProgress
-                                                            .cumulativeBytesLoaded /
-                                                        (loadingProgress
-                                                                .expectedTotalBytes ??
-                                                            1)
-                                                    : null,
-                                              ),
-                                            );
-                                          },
-                                        ),
-                                      ),
-                                      SizedBox(height: Dimensions.height(5)),
-                                      Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            vertical: Dimensions.padding(10),
-                                            horizontal: Dimensions.padding(10)),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                              padding: EdgeInsets.all(
-                                                  Dimensions.padding(2)),
-                                              decoration: BoxDecoration(
-                                                color: Colors.grey.shade100,
-                                                borderRadius:
-                                                    BorderRadius.circular(2),
-                                              ),
-                                              child: Text(
-                                                '11 MINS',
-                                                style: apptxt1,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                                height: Dimensions.height(10)),
-                                            Text(
-                                              product.name,
-                                              style: bstSellerStyle,
-                                            ),
-                                            SizedBox(
-                                                height: Dimensions.height(10)),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Column(
-                                                  children: [
-                                                    Text(
-                                                      '₹ ${product.price.toString()}',
-                                                      style: bstSeller2Style,
-                                                    ),
-                                                    Text(
-                                                      '₹ ${product.oldPrice}',
-                                                      style: oldPrice,
-                                                    ),
-                                                  ],
+                              final products = widget.model.subData[index];
+                              return GestureDetector(
+                                onTap: () => showProductDetails(products),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 5, vertical: 10),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: Colors.white,
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          child: Image.network(
+                                            products.img,
+                                            width: double.infinity,
+                                            height: Dimensions.height(110),
+                                            fit: BoxFit.cover,
+                                            errorBuilder:
+                                                (context, error, stackTrace) =>
+                                                    const Icon(Icons.error),
+                                            loadingBuilder: (context, child,
+                                                loadingProgress) {
+                                              if (loadingProgress == null)
+                                                return child;
+                                              return Center(
+                                                child:
+                                                    CircularProgressIndicator(
+                                                  value: loadingProgress
+                                                              .expectedTotalBytes !=
+                                                          null
+                                                      ? loadingProgress
+                                                              .cumulativeBytesLoaded /
+                                                          (loadingProgress
+                                                                  .expectedTotalBytes ??
+                                                              1)
+                                                      : null,
                                                 ),
-                                                GestureDetector(
-                                                  onTap: () =>
-                                                      addToCart(product),
-                                                  child: Container(
-                                                    padding: const EdgeInsets
-                                                        .symmetric(
-                                                        horizontal: 10,
-                                                        vertical: 2),
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      border: Border.all(
-                                                          color: Colors.green),
-                                                    ),
-                                                    child: const Text('Add'),
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                        SizedBox(height: Dimensions.height(5)),
+                                        Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: Dimensions.padding(10),
+                                              horizontal:
+                                                  Dimensions.padding(10)),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                padding: EdgeInsets.all(
+                                                    Dimensions.padding(2)),
+                                                decoration: BoxDecoration(
+                                                  color: Colors.grey.shade100,
+                                                  borderRadius:
+                                                      BorderRadius.circular(2),
+                                                ),
+                                                child: Text(
+                                                  '11 MINS',
+                                                  style: apptxt1,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  height:
+                                                      Dimensions.height(10)),
+                                              Text(
+                                                products.name,
+                                                style: bstSellerStyle,
+                                              ),
+                                              SizedBox(
+                                                  height:
+                                                      Dimensions.height(10)),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Column(
+                                                    children: [
+                                                      Text(
+                                                        '₹ ${products.price.toString()}',
+                                                        style: bstSeller2Style,
+                                                      ),
+                                                      Text(
+                                                        '₹ ${products.oldPrice}',
+                                                        style: oldPrice,
+                                                      ),
+                                                    ],
                                                   ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
+                                                  GestureDetector(
+                                                    onTap: () =>
+                                                        addToCart(products),
+                                                    child: Container(
+                                                      padding: const EdgeInsets
+                                                          .symmetric(
+                                                          horizontal: 10,
+                                                          vertical: 2),
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        border: Border.all(
+                                                            color:
+                                                                Colors.green),
+                                                      ),
+                                                      child: const Text('Add'),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                               );

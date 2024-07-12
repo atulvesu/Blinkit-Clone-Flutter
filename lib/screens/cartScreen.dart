@@ -1,8 +1,10 @@
+import 'package:blinkit/screens/orderPlacedDialog.dart';
 import 'package:blinkit/widgets/ButtonWidget.dart';
 import 'package:blinkit/widgets/customTextFormFieldWidget2.dart';
 import 'package:flutter/material.dart';
 import 'package:blinkit/style/dimension.dart';
 import 'package:blinkit/style/const.dart';
+import 'package:video_player/video_player.dart';
 
 class CartScreen extends StatefulWidget {
   final List<dynamic> cartItems;
@@ -14,6 +16,19 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  late VideoPlayerController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller =
+        VideoPlayerController.asset('assets/images/Payment Success.mp4')
+          ..initialize().then((_) {
+            setState(() {});
+            _controller.play();
+          });
+  }
+
   static const int shippingCost = 10;
   void _removeItem(product) {
     setState(() {
@@ -207,16 +222,26 @@ class _CartScreenState extends State<CartScreen> {
               ),
             ),
           ),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-            decoration: BoxDecoration(
-                color: const Color(0xff16BE47),
-                borderRadius: BorderRadius.circular(5)),
-            child: Text(
-              textAlign: TextAlign.center,
-              'Choose address at the next step',
-              style: btn2Style,
+          InkWell(
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return OrderPlacedDialog();
+                },
+              );
+            },
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              decoration: BoxDecoration(
+                  color: const Color(0xff16BE47),
+                  borderRadius: BorderRadius.circular(5)),
+              child: Text(
+                textAlign: TextAlign.center,
+                'Choose address at the next step',
+                style: btn2Style,
+              ),
             ),
           ),
         ],

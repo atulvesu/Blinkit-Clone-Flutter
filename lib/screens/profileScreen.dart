@@ -1,3 +1,5 @@
+import 'package:blinkit/screens/accountPrivacyScreen.dart';
+import 'package:blinkit/screens/loginScreen.dart';
 import 'package:blinkit/screens/orderScreen.dart';
 import 'package:blinkit/screens/walletScreen.dart';
 import 'package:blinkit/style/dimension.dart';
@@ -17,7 +19,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       appBar: AppBar(
         title: Text(
           'Profile',
-          style: TextStyle(fontSize: Dimensions.fontSize(12)),
+          style: TextStyle(fontSize: Dimensions.fontSize(14)),
         ),
       ),
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -67,7 +69,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => WalletScreen(),
+                          builder: (context) => const WalletScreen(),
                         ));
                   },
                   child: Column(
@@ -177,6 +179,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
           trailing: Icon(
             Icons.arrow_forward_ios_rounded,
             size: 15,
+          ),
+        ),
+        InkWell(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AccountPrivacyScreen(),
+                ));
+          },
+          child: ListTile(
+            leading: Icon(Icons.book),
+            title: Text('Account privacy'),
+            trailing: Icon(
+              Icons.arrow_forward_ios_rounded,
+              size: 15,
+            ),
+          ),
+        ),
+        InkWell(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => LoginScreen(),
+                ));
+          },
+          child: ListTile(
+            leading: Icon(Icons.book),
+            title: Text('Logout'),
+            trailing: Icon(
+              Icons.arrow_forward_ios_rounded,
+              size: 15,
+            ),
           ),
         ),
       ]),

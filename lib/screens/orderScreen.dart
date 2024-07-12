@@ -15,7 +15,7 @@ class _SupportScreenState extends State<OrderScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text(
+        title: const Text(
           'Your Orders',
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
         ),
