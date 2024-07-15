@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:blinkit/provider/splashProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -8,7 +10,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xfff8cb46),
+      backgroundColor: const Color(0xfff8cb46),
       body: Consumer<SplashProvider>(
         builder: (context, splashProvider, child) {
           splashProvider.nxtScreen(context);
@@ -19,16 +21,17 @@ class SplashScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: Image.asset(
                     'assets/images/logo.png',
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 50,
               ),
-              Text(
+              const Text(
                 'A ZOMATO COMPANY',
                 style: TextStyle(fontFamily: 'Poppins-Bold', fontSize: 18),
               ),

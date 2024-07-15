@@ -1,4 +1,7 @@
 // ignore: unused_import
+// ignore_for_file: use_super_parameters
+
+// ignore: unused_import
 import 'package:blinkit/model/grocery_model.dart';
 import 'package:blinkit/screens/nestedGridScreen.dart';
 import 'package:blinkit/style/const.dart';

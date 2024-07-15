@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, depend_on_referenced_packages, avoid_print
+
 import 'package:blinkit/screens/orderPlacedDialog.dart';
 import 'package:blinkit/widgets/ButtonWidget.dart';
 import 'package:blinkit/widgets/customTextFormFieldWidget2.dart';
@@ -9,7 +11,7 @@ import 'package:video_player/video_player.dart';
 class CartScreen extends StatefulWidget {
   final List<dynamic> cartItems;
 
-  CartScreen({Key? key, required this.cartItems}) : super(key: key);
+  const CartScreen({super.key, required this.cartItems});
 
   @override
   State<CartScreen> createState() => _CartScreenState();
@@ -60,7 +62,7 @@ class _CartScreenState extends State<CartScreen> {
     // bool isCartEmpty = widget.cartItems.isEmpty;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xff16BE47),
+        backgroundColor: const Color(0xff16BE47),
         title: Text(
           'Cart',
           style: TextStyle(
@@ -72,7 +74,7 @@ class _CartScreenState extends State<CartScreen> {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           color: Colors.white,
         ),
       ),
@@ -114,7 +116,7 @@ class _CartScreenState extends State<CartScreen> {
                           ),
                           ListView.builder(
                             shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             itemCount: widget.cartItems.length,
                             itemBuilder: (context, index) {
                               final product = widget.cartItems[index];
@@ -133,7 +135,7 @@ class _CartScreenState extends State<CartScreen> {
                                   onTap: () {
                                     _removeItem(product);
                                   },
-                                  child: Icon(
+                                  child: const Icon(
                                     Icons.delete,
                                     color: Colors.red,
                                   ),
@@ -141,7 +143,7 @@ class _CartScreenState extends State<CartScreen> {
                               );
                             },
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           Padding(
@@ -180,7 +182,7 @@ class _CartScreenState extends State<CartScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Bill Details'),
+                                const Text('Bill Details'),
                                 SizedBox(
                                   height: Dimensions.height(10),
                                 ),
@@ -188,7 +190,7 @@ class _CartScreenState extends State<CartScreen> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text('Item Subtotal'),
+                                    const Text('Item Subtotal'),
                                     Text(totalBill.toString()),
                                   ],
                                 ),
@@ -196,7 +198,7 @@ class _CartScreenState extends State<CartScreen> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text('Shipping Costs'),
+                                    const Text('Shipping Costs'),
                                     Text(shippingCost.toString()),
                                   ],
                                 ),
@@ -204,7 +206,7 @@ class _CartScreenState extends State<CartScreen> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text('Total Bill:'),
+                                    const Text('Total Bill:'),
                                     Text(finalBill.toString()),
                                   ],
                                 ),

@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, use_super_parameters
+
 import 'dart:math';
 import 'package:blinkit/model/bath_model.dart';
 import 'package:blinkit/model/grocery_model.dart';
@@ -22,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.black,
-        shape: CircleBorder(),
+        shape: const CircleBorder(),
         onPressed: () {},
         child: Padding(
           padding: EdgeInsets.all(Dimensions.padding(4)),
@@ -30,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Icon(
+              const Icon(
                 Icons.category,
                 color: Colors.white,
               ),
@@ -78,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: CustomScrollView(
           slivers: [
             CustomAppBar(),
-            PersistentHeader(),
+            const PersistentHeader(),
             SliverToBoxAdapter(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -106,15 +108,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemBuilder: (context, index) => Container(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5)),
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 2, vertical: 5),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 2, vertical: 5),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Expanded(
                               child: Image.asset('assets/images/Untitled.png'),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 5,
                             ),
                             Text(
@@ -125,11 +127,11 @@ class _HomeScreenState extends State<HomeScreen> {
                               '13 products',
                               style: bstSeller2Style,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Container(
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                   horizontal: 20, vertical: 2),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(5),
@@ -170,7 +172,7 @@ class _HomeScreenState extends State<HomeScreen> {
 // -----------------------Ends -------------------------------//
 
 class PersistentHeader extends StatelessWidget {
-  PersistentHeader({
+  const PersistentHeader({
     super.key,
   });
 
@@ -183,17 +185,17 @@ class PersistentHeader extends StatelessWidget {
         maxHeight: 60.0,
         child: Container(
           color: Colors.white,
-          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
             decoration: BoxDecoration(
               color: Colors.grey.shade200,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Row(
               children: [
-                Icon(Icons.search),
-                SizedBox(width: 10),
+                const Icon(Icons.search),
+                const SizedBox(width: 10),
                 Expanded(
                   child: TextFormField(
                     decoration: InputDecoration(
@@ -201,16 +203,16 @@ class PersistentHeader extends StatelessWidget {
                       isDense: false,
                       hintText: 'Search something...',
                       hintStyle: hinttxtStyle,
-                      border: OutlineInputBorder(
+                      border: const OutlineInputBorder(
                         borderSide: BorderSide.none,
                       ),
                     ),
                   ),
                 ),
-                VerticalDivider(thickness: 0.8),
+                const VerticalDivider(thickness: 0.8),
                 InkWell(
                   onTap: () {},
-                  child: Icon(Icons.mic),
+                  child: const Icon(Icons.mic),
                 ),
               ],
             ),
@@ -221,6 +223,7 @@ class PersistentHeader extends StatelessWidget {
   }
 }
 
+// ignore: use_key_in_widget_constructors
 class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -231,7 +234,7 @@ class CustomAppBar extends StatelessWidget {
       expandedHeight: 100,
       collapsedHeight: 90,
       flexibleSpace: FlexibleSpaceBar(
-        titlePadding: EdgeInsets.symmetric(horizontal: 10),
+        titlePadding: const EdgeInsets.symmetric(horizontal: 10),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -241,7 +244,7 @@ class CustomAppBar extends StatelessWidget {
               'Delivery in ',
               style: apptxt1,
             ),
-            SizedBox(height: 4),
+            const SizedBox(height: 4),
             Text(
               '11 minutes',
               style: apptxt2,
@@ -252,7 +255,7 @@ class CustomAppBar extends StatelessWidget {
                   'E Block, Sector 8, Meerut Division',
                   style: apptxt3,
                 ),
-                Icon(Icons.arrow_drop_down),
+                const Icon(Icons.arrow_drop_down),
               ],
             ),
           ],
@@ -266,7 +269,7 @@ class CustomAppBar extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ProfileScreen(),
+                    builder: (context) => const ProfileScreen(),
                   ));
             },
             icon: const Icon(

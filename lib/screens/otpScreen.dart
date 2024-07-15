@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:blinkit/style/const.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +23,7 @@ class _OtpScreenState extends State<OtpScreen> {
             onTap: () {
               Navigator.pop(context);
             },
-            child: Icon(Icons.arrow_back)),
+            child: const Icon(Icons.arrow_back)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -40,7 +42,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 style: otpbtn2Style,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Padding(
@@ -55,7 +57,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             InkWell(
@@ -78,7 +80,7 @@ class _OtpScreenState extends State<OtpScreen> {
         border: Border.all(color: Colors.black),
         borderRadius: BorderRadius.circular(8),
       ),
-      child: Center(
+      child: const Center(
         child: TextField(
           textAlign: TextAlign.center,
           keyboardType: TextInputType.number,

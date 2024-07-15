@@ -1,10 +1,12 @@
+// ignore_for_file: file_names, use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class WebViewScreen extends StatefulWidget {
   final String url;
 
-  WebViewScreen({required this.url});
+  const WebViewScreen({required this.url});
 
   @override
   State<WebViewScreen> createState() => _WebViewScreenState();
@@ -23,7 +25,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: CircleAvatar(
+              icon: const CircleAvatar(
                   child: Center(child: Icon(Icons.arrow_back_outlined)))),
           Expanded(
             child: WebViewWidget(

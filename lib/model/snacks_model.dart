@@ -80,7 +80,7 @@ class SnacksModel {
                   'https://images.unsplash.com/photo-1585220202939-c10ec7c6dc4e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTV8fENoaXBzfGVufDB8fDB8fHww',
               oldPrice: 50,
               price: 39,
-              name: "Keogh\'s Chips")
+              name: "Keogh's Chips")
         ]),
     SnacksModel(
       id: 2,

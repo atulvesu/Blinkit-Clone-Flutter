@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, use_key_in_widget_constructors, library_private_types_in_public_api
+
 import 'package:blinkit/screens/homeScreen.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +18,7 @@ class _OrderPlacedDialogState extends State<OrderPlacedDialog> {
   }
 
   void _startOrderProcess() async {
-    await Future.delayed(Duration(seconds: 5));
+    await Future.delayed(const Duration(seconds: 5));
     setState(() {
       _isOrderPlaced = true;
     });
@@ -31,24 +33,25 @@ class _OrderPlacedDialogState extends State<OrderPlacedDialog> {
           _isOrderPlaced
               ? Column(
                   children: [
-                    Icon(Icons.check_circle, color: Colors.green, size: 50),
-                    SizedBox(height: 20),
-                    Text('hooray, order placed'),
-                    SizedBox(height: 20),
+                    const Icon(Icons.check_circle,
+                        color: Colors.green, size: 50),
+                    const SizedBox(height: 20),
+                    const Text('hooray, order placed'),
+                    const SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: () {
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => HomeScreen(),
+                              builder: (context) => const HomeScreen(),
                             ),
                             (Route<dynamic> route) => false);
                       },
-                      child: Text('OK'),
+                      child: const Text('OK'),
                     ),
                   ],
                 )
-              : Column(
+              : const Column(
                   children: [
                     CircularProgressIndicator(),
                     SizedBox(height: 20),

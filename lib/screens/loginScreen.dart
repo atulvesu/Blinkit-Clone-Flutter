@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:blinkit/screens/WebViewScreen.dart';
 import 'package:blinkit/style/dimension.dart';
 import 'package:flutter/material.dart';
@@ -34,13 +36,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: SingleChildScrollView(
                   physics: const NeverScrollableScrollPhysics(),
                   child: Padding(
-                    padding: EdgeInsets.all(5.0),
+                    padding: const EdgeInsets.all(5.0),
                     child: Column(
                       children: [
                         Stack(
                           children: [
                             AnimatedContainer(
-                              duration: Duration(seconds: 10),
+                              duration: const Duration(seconds: 10),
                               margin: EdgeInsets.only(
                                   top: _topPosition, left: _leftPosition),
                               child: GestureDetector(
@@ -59,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 child: Card(
                                   elevation: 2,
                                   child: Padding(
-                                    padding: EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.all(8.0),
                                     child: Text(
                                       'Skip Login',
                                       style: skipStyle,
@@ -79,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   children: [
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Column(
                         children: [
                           Image.asset(
@@ -93,18 +95,18 @@ class _LoginScreenState extends State<LoginScreen> {
                             'India\'s last minute app',
                             style: loginHeadStyle,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 5,
                           ),
                           Text(
                             'Log in or sign up',
                             style: loginHead2Style,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           Container(
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 vertical: 5, horizontal: 5),
                             decoration: BoxDecoration(
                               border: Border.all(color: Colors.grey),
@@ -120,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     style: loginInput2Style,
                                   ),
                                 ),
-                                SizedBox(width: 5),
+                                const SizedBox(width: 5),
                                 Expanded(
                                   child: TextFormField(
                                     keyboardType: TextInputType.number,
@@ -139,7 +141,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ],
                             ),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           InkWell(
                             onTap: () {
                               Navigator.pushNamed(context, '/otpScreen');
@@ -149,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.grey.shade500,
                               ),
-                              padding: EdgeInsets.symmetric(vertical: 10),
+                              padding: const EdgeInsets.symmetric(vertical: 10),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -163,14 +165,14 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                         ],
                       ),
                     ),
                     Container(
                       color: Colors.grey.shade200,
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 10),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -187,7 +189,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => WebViewScreen(
+                                  builder: (context) => const WebViewScreen(
                                     url: 'https://blinkit.com/terms',
                                   ),
                                 ),
@@ -207,7 +209,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => WebViewScreen(
+                                  builder: (context) => const WebViewScreen(
                                     url: 'https://blinkit.com/privacy',
                                   ),
                                 ),

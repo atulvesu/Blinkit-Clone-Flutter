@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:blinkit/screens/accountPrivacyScreen.dart';
 import 'package:blinkit/screens/loginScreen.dart';
 import 'package:blinkit/screens/orderScreen.dart';
@@ -26,8 +28,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
               child: Text(
                 'My account',
                 style: TextStyle(fontSize: 20),
@@ -36,8 +38,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             SizedBox(
               height: Dimensions.height(10),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
               child: Text('Log in or sign up to your complete profile'),
             ),
             Padding(
@@ -48,8 +50,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     border: Border.all(color: Colors.green),
                     borderRadius: BorderRadius.circular(5)),
                 width: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                child: Text(textAlign: TextAlign.center, 'Continue'),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                child: const Text(textAlign: TextAlign.center, 'Continue'),
               ),
             ),
           ],
@@ -57,7 +60,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Container(
-            color: Color(0xffF0F8FF),
+            color: const Color(0xffF0F8FF),
             padding: EdgeInsets.symmetric(
                 horizontal: Dimensions.padding(40),
                 vertical: Dimensions.padding(15)),
@@ -72,7 +75,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           builder: (context) => const WalletScreen(),
                         ));
                   },
-                  child: Column(
+                  child: const Column(
                     children: [
                       Icon(Icons.wallet),
                       Text('Wallet'),
@@ -81,14 +84,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 InkWell(
                   onTap: () {},
-                  child: Column(
+                  child: const Column(
                     children: [
                       Icon(Icons.wallet),
                       Text('Support'),
                     ],
                   ),
                 ),
-                Column(
+                const Column(
                   children: [
                     Icon(Icons.wallet),
                     Text('Payment'),
@@ -107,21 +110,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
             decoration: BoxDecoration(
                 border: Border.all(width: 0.1),
                 borderRadius: BorderRadius.circular(5)),
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   children: [
-                    Icon(Icons.loop),
+                    const Icon(Icons.loop),
                     SizedBox(
                       width: Dimensions.width(10),
                     ),
-                    Text('App update available'),
+                    const Text('App update available'),
                   ],
                 ),
-                Container(color: Colors.grey.shade100, child: Text('v16.3.3')),
-                Icon(Icons.arrow_right_outlined)
+                Container(
+                    color: Colors.grey.shade100, child: const Text('v16.3.3')),
+                const Icon(Icons.arrow_right_outlined)
               ],
             ),
           ),
@@ -134,14 +138,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
             horizontal: Dimensions.padding(20),
             vertical: Dimensions.padding(10),
           ),
-          child: Text('YOUR INFORMATION'),
+          child: const Text('YOUR INFORMATION'),
         ),
         InkWell(
           onTap: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const OrderScreen()));
           },
-          child: ListTile(
+          child: const ListTile(
             leading: Icon(Icons.book),
             title: Text('Your orders'),
             trailing: Icon(
@@ -150,7 +154,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
         ),
-        ListTile(
+        const ListTile(
           leading: Icon(Icons.book),
           title: Text('Address Book'),
           trailing: Icon(
@@ -163,9 +167,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             horizontal: Dimensions.padding(15),
             vertical: Dimensions.padding(10),
           ),
-          child: Text('OTHER INFORMATION'),
+          child: const Text('OTHER INFORMATION'),
         ),
-        ListTile(
+        const ListTile(
           leading: Icon(Icons.book),
           title: Text('Share the app'),
           trailing: Icon(
@@ -173,7 +177,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             size: 15,
           ),
         ),
-        ListTile(
+        const ListTile(
           leading: Icon(Icons.book),
           title: Text('About us'),
           trailing: Icon(
@@ -186,10 +190,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => AccountPrivacyScreen(),
+                  builder: (context) => const AccountPrivacyScreen(),
                 ));
           },
-          child: ListTile(
+          child: const ListTile(
             leading: Icon(Icons.book),
             title: Text('Account privacy'),
             trailing: Icon(
@@ -203,10 +207,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => LoginScreen(),
+                  builder: (context) => const LoginScreen(),
                 ));
           },
-          child: ListTile(
+          child: const ListTile(
             leading: Icon(Icons.book),
             title: Text('Logout'),
             trailing: Icon(

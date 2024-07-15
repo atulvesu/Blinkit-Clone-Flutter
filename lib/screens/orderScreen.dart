@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, camel_case_types
+
 import 'package:blinkit/style/const.dart';
 import 'package:blinkit/style/dimension.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +30,7 @@ class _SupportScreenState extends State<OrderScreen> {
             child: Card(
               elevation: 2,
               child: Container(
-                padding: EdgeInsets.only(top: 10),
+                padding: const EdgeInsets.only(top: 10),
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10)),
@@ -46,13 +48,13 @@ class _SupportScreenState extends State<OrderScreen> {
                                   decoration: BoxDecoration(
                                       color: Colors.teal.shade100,
                                       borderRadius: BorderRadius.circular(10)),
-                                  padding: EdgeInsets.symmetric(
+                                  padding: const EdgeInsets.symmetric(
                                       horizontal: 10, vertical: 10),
-                                  child: Icon(Icons.check)),
+                                  child: const Icon(Icons.check)),
                               SizedBox(
                                 width: Dimensions.width(15),
                               ),
-                              Column(
+                              const Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
@@ -66,17 +68,17 @@ class _SupportScreenState extends State<OrderScreen> {
                               ),
                             ],
                           ),
-                          Icon(
+                          const Icon(
                             Icons.arrow_forward,
                           ),
                         ],
                       ),
                     ),
-                    Divider(
+                    const Divider(
                       thickness: 0.1,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10),
                       child: Row(
                         children: [
                           Expanded(child: con()),
@@ -89,19 +91,18 @@ class _SupportScreenState extends State<OrderScreen> {
                     ),
                     Container(
                       height: 50,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           border: Border(top: BorderSide(width: 0.1))),
-                      child: Row(
+                      child: const Row(
                         children: [
                           Expanded(
                             flex: 2,
-                            child: Container(
-                                child: Center(
-                                    child: Text(
+                            child: Center(
+                                child: Text(
                               textAlign: TextAlign.center,
                               "Reorder",
                               style: orderStyle,
-                            ))),
+                            )),
                           ),
                           Expanded(
                               flex: 1,
@@ -111,12 +112,11 @@ class _SupportScreenState extends State<OrderScreen> {
                               )),
                           Expanded(
                             flex: 2,
-                            child: Container(
-                                child: Text(
+                            child: Text(
                               textAlign: TextAlign.center,
                               'Rate Order',
                               style: orderStyle,
-                            )),
+                            ),
                           ),
                         ],
                       ),
@@ -140,7 +140,7 @@ class con extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
@@ -163,7 +163,7 @@ class con2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
@@ -171,7 +171,7 @@ class con2 extends StatelessWidget {
           color: Colors.grey,
           height: 50,
           width: 50,
-          child: Center(
+          child: const Center(
             child: Text('+4'),
           ),
         ),

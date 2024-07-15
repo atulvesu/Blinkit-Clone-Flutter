@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import, file_names
+
 import 'package:blinkit/screens/homeScreen.dart';
 import 'package:blinkit/screens/loginScreen.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +21,7 @@ class _AccountPrivacyScreenState extends State<AccountPrivacyScreen> {
   }
 
   void _startOrderProcess(Function setStateDialog) async {
-    await Future.delayed(Duration(seconds: 5));
+    await Future.delayed(const Duration(seconds: 5));
     setState(() {
       _isOrderPlaced = true;
     });
@@ -43,10 +45,10 @@ class _AccountPrivacyScreenState extends State<AccountPrivacyScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Account privacy and policy'),
-              Text(
+              const Text('Account privacy and policy'),
+              const Text(
                   'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               readMore
@@ -56,7 +58,7 @@ class _AccountPrivacyScreenState extends State<AccountPrivacyScreen> {
                           readMore = !readMore;
                         });
                       },
-                      child: Row(
+                      child: const Row(
                         children: [
                           Text(
                             'Read more',
@@ -71,9 +73,9 @@ class _AccountPrivacyScreenState extends State<AccountPrivacyScreen> {
                     )
                   : Column(
                       children: [
-                        Text(
+                        const Text(
                             'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.'),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         InkWell(
@@ -82,7 +84,7 @@ class _AccountPrivacyScreenState extends State<AccountPrivacyScreen> {
                               readMore = !readMore;
                             });
                           },
-                          child: Row(
+                          child: const Row(
                             children: [
                               Text(
                                 'Read less',
@@ -98,7 +100,7 @@ class _AccountPrivacyScreenState extends State<AccountPrivacyScreen> {
                         ),
                       ],
                     ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               InkWell(
@@ -117,27 +119,28 @@ class _AccountPrivacyScreenState extends State<AccountPrivacyScreen> {
                                 _isOrderPlaced
                                     ? Column(
                                         children: [
-                                          Icon(Icons.check_circle,
+                                          const Icon(Icons.check_circle,
                                               color: Colors.green, size: 50),
-                                          SizedBox(height: 20),
-                                          Text('Account deleted successfully'),
-                                          SizedBox(height: 20),
+                                          const SizedBox(height: 20),
+                                          const Text(
+                                              'Account deleted successfully'),
+                                          const SizedBox(height: 20),
                                           ElevatedButton(
                                             onPressed: () {
                                               Navigator.pushAndRemoveUntil(
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
-                                                        LoginScreen(),
+                                                        const LoginScreen(),
                                                   ),
                                                   (Route<dynamic> route) =>
                                                       false);
                                             },
-                                            child: Text('OK'),
+                                            child: const Text('OK'),
                                           ),
                                         ],
                                       )
-                                    : Column(
+                                    : const Column(
                                         children: [
                                           CircularProgressIndicator(),
                                           SizedBox(height: 20),
@@ -156,8 +159,9 @@ class _AccountPrivacyScreenState extends State<AccountPrivacyScreen> {
                   decoration: BoxDecoration(
                       border: Border.all(width: 0.1),
                       borderRadius: BorderRadius.circular(10)),
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  child: Row(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(

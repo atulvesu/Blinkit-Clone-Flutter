@@ -1,4 +1,6 @@
-import 'package:blinkit/model/home_model.dart';
+// ignore: unused_import
+// ignore_for_file: file_names, library_private_types_in_public_api
+import 'package:blinkit/screens/foodRepScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:blinkit/screens/cartScreen.dart';
 import 'package:blinkit/style/dimension.dart';
@@ -7,7 +9,7 @@ import 'package:blinkit/style/const.dart';
 class NestedGridScreen extends StatefulWidget {
   final dynamic model;
 
-  NestedGridScreen({Key? key, required this.model}) : super(key: key);
+  const NestedGridScreen({super.key, required this.model});
 
   @override
   _NestedGridScreenState createState() => _NestedGridScreenState();
@@ -24,67 +26,177 @@ class _NestedGridScreenState extends State<NestedGridScreen> {
 
   void showProductDetails(product) {
     showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
       builder: (context) {
-        return Container(
-          padding: EdgeInsets.all(Dimensions.padding(10)),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.network(
-                    product.img,
-                    width: Dimensions.width(100),
-                    height: Dimensions.height(100),
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) =>
-                        const Icon(Icons.error),
-                    loadingBuilder: (context, child, loadingProgress) {
-                      if (loadingProgress == null) return child;
-                      return Center(
-                        child: CircularProgressIndicator(
-                          value: loadingProgress.expectedTotalBytes != null
-                              ? loadingProgress.cumulativeBytesLoaded /
-                                  (loadingProgress.expectedTotalBytes ?? 1)
-                              : null,
-                        ),
-                      );
-                    },
+        return SingleChildScrollView(
+          child: Container(
+            color: const Color(0xff00FFFFFF),
+            child: Column(
+              children: [
+                // Icon(Icons.cancel_outlined),
+                // SizedBox(
+                //   height: 5,
+                // ),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: const Color(0xff00FFFFFF),
+                  ),
+                  child: Column(
+                    children: [
+                      Text('f'),
+                      Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Center(
+                            child: ClipRRect(
+                              borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(20),
+                                  topRight: Radius.circular(20)),
+                              child: Image.network(
+                                product.img,
+                                height: Dimensions.height(200),
+                                width: double.infinity,
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) =>
+                                    const Icon(Icons.error),
+                                loadingBuilder:
+                                    (context, child, loadingProgress) {
+                                  if (loadingProgress == null) return child;
+                                  return Center(
+                                    child: CircularProgressIndicator(
+                                      value:
+                                          loadingProgress.expectedTotalBytes !=
+                                                  null
+                                              ? loadingProgress
+                                                      .cumulativeBytesLoaded /
+                                                  (loadingProgress
+                                                          .expectedTotalBytes ??
+                                                      1)
+                                              : null,
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: Dimensions.height(10)),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: Text(
+                              product.name,
+                              style: bstSellerStyle,
+                            ),
+                          ),
+                          SizedBox(height: Dimensions.height(10)),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: Text(
+                              'Price: ₹${product.price.toString()}',
+                              style: bstSeller2Style,
+                            ),
+                          ),
+                          SizedBox(height: Dimensions.height(10)),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: Text(
+                              'Old Price: ₹${product.oldPrice}',
+                              style: oldPrice,
+                            ),
+                          ),
+                          SizedBox(height: Dimensions.height(10)),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: Text(
+                              'Description: ${product.description}',
+                              style:
+                                  TextStyle(fontSize: Dimensions.fontSize(12)),
+                            ),
+                          ),
+                          SizedBox(height: Dimensions.height(10)),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: InkWell(
+                              onTap: () {
+                                addToCart(product);
+                                Navigator.pop(context);
+                              },
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.teal),
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 10, horizontal: 10),
+                                  width: double.infinity,
+                                  child: Text(
+                                    textAlign: TextAlign.center,
+                                    'Add to cart',
+                                    style: TextStyle(
+                                        fontSize: Dimensions.fontSize(12),
+                                        color: Colors.white),
+                                  )),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 20),
+                            child: Text(
+                              'Online Recipes for you',
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black),
+                            ),
+                          ),
+                          SizedBox(
+                            height: Dimensions.height(120),
+                            child: ListView.builder(
+                              itemCount: 6,
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const FoodRepScreen(),
+                                          ));
+                                    },
+                                    child: Container(
+                                      child: Column(
+                                        children: [
+                                          Image.network(
+                                              'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fEZvb2R8ZW58MHx8MHx8fDA%3D',
+                                              height: 60,
+                                              width: 60,
+                                              fit: BoxFit.cover),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          const Text('Lorem Ip')
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
                   ),
                 ),
-              ),
-              SizedBox(height: Dimensions.height(10)),
-              Text(
-                product.name,
-                style: bstSellerStyle,
-              ),
-              SizedBox(height: Dimensions.height(10)),
-              Text(
-                'Price: ₹${product.price.toString()}',
-                style: bstSeller2Style,
-              ),
-              SizedBox(height: Dimensions.height(10)),
-              Text(
-                'Old Price: ₹${product.oldPrice}',
-                style: oldPrice,
-              ),
-              // SizedBox(height: Dimensions.height(10)),
-              // Text(
-              //   'Description: ${product.description}',
-              //   style: TextStyle(fontSize: Dimensions.fontSize(12)),
-              // ),
-              SizedBox(height: Dimensions.height(10)),
-              ElevatedButton(
-                onPressed: () {
-                  addToCart(product);
-                  Navigator.pop(context);
-                },
-                child: Text('Add to Cart'),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
@@ -208,8 +320,9 @@ class _NestedGridScreenState extends State<NestedGridScreen> {
                                                     const Icon(Icons.error),
                                             loadingBuilder: (context, child,
                                                 loadingProgress) {
-                                              if (loadingProgress == null)
+                                              if (loadingProgress == null) {
                                                 return child;
+                                              }
                                               return Center(
                                                 child:
                                                     CircularProgressIndicator(
@@ -318,14 +431,14 @@ class _NestedGridScreenState extends State<NestedGridScreen> {
           ),
           const SizedBox(height: 2),
           Container(
-            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
             child: Row(
               children: [
                 Expanded(
                     child: Text(
                   textAlign: TextAlign.center,
                   '${cartItems.length} ITEMS',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14,
                   ),
                 )),
@@ -345,9 +458,9 @@ class _NestedGridScreenState extends State<NestedGridScreen> {
                           borderRadius: BorderRadius.circular(5),
                           color: Colors.green,
                         ),
-                        padding:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                        child: Text(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 10),
+                        child: const Text(
                           textAlign: TextAlign.center,
                           'Next',
                           style: TextStyle(color: Colors.white, fontSize: 14),
