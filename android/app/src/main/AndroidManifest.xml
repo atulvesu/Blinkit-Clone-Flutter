@@ -1,7 +1,8 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+package="com.example.blinkit"
+>
  <uses-permission android:name="android.permission.INTERNET"/>
- <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
 
     <application
         android:label="blinkit"
@@ -12,9 +13,6 @@
             android:name=".MainActivity"
             android:usesCleartextTraffic="true"
             android:exported="true"
-         android:launchMode="singleTop"
-           android:windowSoftInputMode="adjustResize"
-            android:taskAffinity=""
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"

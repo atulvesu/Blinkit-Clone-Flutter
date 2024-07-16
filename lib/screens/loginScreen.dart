@@ -1,6 +1,6 @@
 // ignore_for_file: file_names
-
 import 'package:blinkit/screens/WebViewScreen.dart';
+import 'package:blinkit/screens/homeScreen.dart';
 import 'package:blinkit/style/dimension.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -21,7 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void _moveImage() {
     setState(() {
       _topPosition = _topPosition == 0 ? 400 : 0;
-      _leftPosition = _leftPosition == 0 ? 400 : 0;
+      _leftPosition = _leftPosition == 0 ? 300 : 0;
     });
   }
 
@@ -146,22 +146,32 @@ class _LoginScreenState extends State<LoginScreen> {
                             onTap: () {
                               Navigator.pushNamed(context, '/otpScreen');
                             },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.grey.shade500,
-                              ),
-                              padding: const EdgeInsets.symmetric(vertical: 10),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Center(
-                                    child: Text(
-                                      'Continue',
-                                      style: btnStyle,
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const HomeScreen(),
+                                    ));
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.grey.shade500,
+                                ),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 10),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Center(
+                                      child: Text(
+                                        'Continue',
+                                        style: btnStyle,
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           ),

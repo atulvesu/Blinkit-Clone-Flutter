@@ -1,5 +1,4 @@
 // ignore_for_file: file_names, camel_case_types
-
 import 'package:blinkit/style/const.dart';
 import 'package:blinkit/style/dimension.dart';
 import 'package:flutter/material.dart';

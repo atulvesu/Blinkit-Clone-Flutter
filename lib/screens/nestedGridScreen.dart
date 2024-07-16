@@ -17,6 +17,7 @@ class NestedGridScreen extends StatefulWidget {
 
 class _NestedGridScreenState extends State<NestedGridScreen> {
   List<dynamic> cartItems = [];
+  Map<int, int> productQuantities = {};
 
   void addToCart(product) {
     setState(() {
@@ -45,7 +46,6 @@ class _NestedGridScreenState extends State<NestedGridScreen> {
                   ),
                   child: Column(
                     children: [
-                      Text('f'),
                       Column(
                         mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -288,7 +288,7 @@ class _NestedGridScreenState extends State<NestedGridScreen> {
                             gridDelegate:
                                 const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2,
-                              childAspectRatio: 1 / 1.7,
+                              childAspectRatio: 1 / 1.9,
                               mainAxisSpacing: 5,
                             ),
                             itemBuilder: (context, index) {
@@ -411,6 +411,67 @@ class _NestedGridScreenState extends State<NestedGridScreen> {
                                                   ),
                                                 ],
                                               ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceAround,
+                                                children: [
+                                                  GestureDetector(
+                                                    onTap: () => setState(() {
+                                                      productQuantities[products
+                                                              .id] =
+                                                          (productQuantities[
+                                                                      products
+                                                                          .id] ??
+                                                                  0) +
+                                                              1;
+                                                    }),
+                                                    child: Container(
+                                                        padding:
+                                                            EdgeInsets.all(5),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                                color:
+                                                                    Colors.teal,
+                                                                shape: BoxShape
+                                                                    .circle),
+                                                        child: Text('+')),
+                                                  ),
+                                                  Text(productQuantities[
+                                                              products.id]
+                                                          ?.toString() ??
+                                                      '0'),
+                                                  GestureDetector(
+                                                    onTap: () => setState(() {
+                                                      if (productQuantities[
+                                                                  products
+                                                                      .id] !=
+                                                              null &&
+                                                          productQuantities[
+                                                                  products
+                                                                      .id]! >
+                                                              0) {
+                                                        productQuantities[
+                                                                products.id] =
+                                                            productQuantities[
+                                                                    products
+                                                                        .id]! -
+                                                                1;
+                                                      }
+                                                    }),
+                                                    child: Container(
+                                                        padding:
+                                                            EdgeInsets.all(5),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                                color:
+                                                                    Colors.teal,
+                                                                shape: BoxShape
+                                                                    .circle),
+                                                        child: Text('-')),
+                                                  ),
+                                                ],
+                                              )
                                             ],
                                           ),
                                         ),
