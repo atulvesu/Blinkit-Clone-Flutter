@@ -129,9 +129,11 @@ class _NestedGridScreenState extends State<NestedGridScreen> {
                               child: Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    color: _isAddedToCart
-                                        ? Colors.pink
-                                        : Colors.teal,
+                                    border: Border.all(
+                                      color: _isAddedToCart
+                                          ? Colors.white
+                                          : Colors.green,
+                                    ),
                                   ),
                                   padding: const EdgeInsets.symmetric(
                                       vertical: 10, horizontal: 10),
@@ -141,7 +143,9 @@ class _NestedGridScreenState extends State<NestedGridScreen> {
                                     'Add to cart',
                                     style: TextStyle(
                                         fontSize: Dimensions.fontSize(12),
-                                        color: Colors.white),
+                                        color: _isAddedToCart
+                                            ? Colors.white
+                                            : Colors.green),
                                   )),
                             ),
                           ),
@@ -178,15 +182,22 @@ class _NestedGridScreenState extends State<NestedGridScreen> {
                                     },
                                     child: Column(
                                       children: [
-                                        Image.network(
-                                            'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fEZvb2R8ZW58MHx8MHx8fDA%3D',
-                                            height: 60,
-                                            width: 60,
-                                            fit: BoxFit.cover),
+                                        ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          child: Image.network(
+                                              'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fEZvb2R8ZW58MHx8MHx8fDA%3D',
+                                              height: 50,
+                                              width: 50,
+                                              fit: BoxFit.cover),
+                                        ),
                                         const SizedBox(
                                           height: 10,
                                         ),
-                                        const Text('Lorem Ip')
+                                        const Text(
+                                          'Lorem Ip',
+                                          style: TextStyle(fontSize: 12),
+                                        )
                                       ],
                                     ),
                                   ),
@@ -399,6 +410,7 @@ class _NestedGridScreenState extends State<NestedGridScreen> {
                                                   onTap: () =>
                                                       addToCart(products),
                                                   child: Container(
+                                                    width: double.infinity,
                                                     padding: const EdgeInsets
                                                         .symmetric(
                                                         horizontal: 10,
@@ -410,106 +422,136 @@ class _NestedGridScreenState extends State<NestedGridScreen> {
                                                       border: Border.all(
                                                           color: Colors.green),
                                                     ),
-                                                    child: const Text('Add'),
+                                                    child: const Text(
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        'Add'),
                                                   ),
                                                 ),
 
                                               // Show counter only when the product is added
                                               if (showCounter[products.id] ==
                                                   true)
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceAround,
-                                                  children: [
-                                                    GestureDetector(
-                                                      onTap: () => setState(() {
-                                                        if (productQuantities[
-                                                                    products
-                                                                        .id] !=
-                                                                null &&
-                                                            productQuantities[
-                                                                    products
-                                                                        .id]! >
-                                                                0) {
-                                                          productQuantities[
-                                                                  products.id] =
+                                                Container(
+                                                  padding: EdgeInsets.symmetric(
+                                                      vertical: 4),
+                                                  decoration: BoxDecoration(
+                                                      color: Colors.teal,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5)),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceAround,
+                                                    children: [
+                                                      GestureDetector(
+                                                        onTap: () =>
+                                                            setState(() {
+                                                          if (productQuantities[
+                                                                      products
+                                                                          .id] !=
+                                                                  null &&
                                                               productQuantities[
                                                                       products
-                                                                          .id]! -
+                                                                          .id]! >
+                                                                  0) {
+                                                            productQuantities[
+                                                                    products
+                                                                        .id] =
+                                                                productQuantities[
+                                                                        products
+                                                                            .id]! -
+                                                                    1;
+                                                            if (productQuantities[
+                                                                    products
+                                                                        .id] ==
+                                                                0) {
+                                                              cartItems.remove(
+                                                                  products);
+                                                              showCounter[
+                                                                      products
+                                                                          .id] =
+                                                                  false; // Hide counter if quantity is 0
+                                                            }
+                                                          }
+                                                        }),
+                                                        // paste here
+                                                        child: Container(
+                                                            padding: EdgeInsets
+                                                                .symmetric(
+                                                                    horizontal:
+                                                                        10),
+                                                            decoration: const BoxDecoration(
+                                                                color:
+                                                                    Colors.teal,
+                                                                shape: BoxShape
+                                                                    .rectangle),
+                                                            child: const Text(
+                                                              '-',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            )),
+                                                        // here..
+                                                      ),
+                                                      Text(
+                                                        productQuantities[
+                                                                    products.id]
+                                                                ?.toString() ??
+                                                            '0',
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500),
+                                                      ),
+                                                      GestureDetector(
+                                                        // paste
+
+                                                        onTap: () =>
+                                                            setState(() {
+                                                          productQuantities[
+                                                                  products.id] =
+                                                              (productQuantities[
+                                                                          products
+                                                                              .id] ??
+                                                                      0) +
                                                                   1;
-                                                          if (productQuantities[
-                                                                  products
-                                                                      .id] ==
-                                                              0) {
-                                                            cartItems.remove(
-                                                                products);
-                                                            showCounter[products
-                                                                    .id] =
-                                                                false; // Hide counter if quantity is 0
+                                                          if (!cartItems
+                                                              .contains(
+                                                                  products)) {
+                                                            cartItems
+                                                                .add(products);
                                                           }
                                                         }
-                                                      }),
-                                                      // paste here
-                                                      child: Container(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(6),
-                                                          decoration:
-                                                              const BoxDecoration(
+                                                                // here
+                                                                ),
+                                                        child: Container(
+                                                            padding: EdgeInsets
+                                                                .symmetric(
+                                                                    horizontal:
+                                                                        10),
+                                                            decoration: const BoxDecoration(
+                                                                color:
+                                                                    Colors.teal,
+                                                                shape: BoxShape
+                                                                    .rectangle),
+                                                            child: const Text(
+                                                              '+',
+                                                              style: TextStyle(
                                                                   color: Colors
-                                                                      .teal,
-                                                                  shape: BoxShape
-                                                                      .circle),
-                                                          child: const Text(
-                                                            '-',
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .white),
-                                                          )),
-                                                      // here..
-                                                    ),
-                                                    Text(productQuantities[
-                                                                products.id]
-                                                            ?.toString() ??
-                                                        '0'),
-                                                    GestureDetector(
-                                                      // paste
-
-                                                      onTap: () => setState(() {
-                                                        productQuantities[
-                                                                products.id] =
-                                                            (productQuantities[
-                                                                        products
-                                                                            .id] ??
-                                                                    0) +
-                                                                1;
-                                                        if (!cartItems.contains(
-                                                            products)) {
-                                                          cartItems
-                                                              .add(products);
-                                                        }
-                                                      }
-                                                          // here
-                                                          ),
-                                                      child: Container(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(6),
-                                                          decoration:
-                                                              const BoxDecoration(
-                                                                  color: Colors
-                                                                      .teal,
-                                                                  shape: BoxShape
-                                                                      .circle),
-                                                          child: const Text(
-                                                            '+',
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .white),
-                                                          )),
-                                                    ),
-                                                  ],
+                                                                      .white,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            )),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                             ],
                                           ),

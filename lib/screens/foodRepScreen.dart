@@ -59,7 +59,7 @@ class _FoodRepScreenState extends State<FoodRepScreen> {
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 10),
               child: Text(
-                'Lorem Ipsum',
+                'Cilantro Paneer',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
             ),
@@ -69,7 +69,7 @@ class _FoodRepScreenState extends State<FoodRepScreen> {
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 10),
               child: Text(
-                'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32. The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.',
+                'Cilantro Paneer is a delightful Indian dish where golden-brown cubes of paneer are cooked with a flavorful blend of spices and fresh cilantro. In a heated pan, cumin seeds crackle in oil before onions, ginger-garlic paste, and green chilies are sautéed to aromatic perfection. Turmeric, red chili powder, and salt join in, infusing the dish with warmth and spice. Tomato puree adds a tangy richness, simmering until the sauce thickens and coats the paneer cubes. Chopped cilantro leaves are stirred in, lending a fresh, herbaceous note. A sprinkle of garam masala enhances the dish\'s complexity, marrying all flavors together. Serve this fragrant Cilantro Paneer hot, garnished with more cilantro leaves and perhaps a squeeze of lemon, alongside naan or steamed rice for a truly satisfying meal..Enjoy your delicious Cilantro Paneer! Adjust the spice levels according to your preference.Serve hot with roti, naan, or rice. Optionally, serve with lemon wedges for extra tanginess.',
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
               ),
             ),
@@ -92,23 +92,25 @@ class _FoodRepScreenState extends State<FoodRepScreen> {
                       children: [
                         Text(
                           '30 Min',
-                          style: TextStyle(fontSize: 16),
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
                         ),
                         Text(
                           'Cook Time',
-                          style: TextStyle(fontSize: 14),
+                          style: TextStyle(fontSize: 12),
                         )
                       ],
                     ),
                     Column(
                       children: [
                         Text(
-                          '30 Min',
-                          style: TextStyle(fontSize: 15),
+                          '4',
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold),
                         ),
                         Text(
                           'Serving',
-                          style: TextStyle(fontSize: 14),
+                          style: TextStyle(fontSize: 12),
                         )
                       ],
                     ),
@@ -116,17 +118,17 @@ class _FoodRepScreenState extends State<FoodRepScreen> {
                       children: [
                         Icon(Icons.receipt_outlined),
                         Text(
-                          '30 Min',
-                          style: TextStyle(fontSize: 15),
+                          'Recipe',
+                          style: TextStyle(fontSize: 12),
                         ),
                       ],
                     ),
                     Column(
                       children: [
-                        Icon(Icons.doorbell),
+                        Icon(Icons.heart_broken),
                         Text(
-                          '30 Min',
-                          style: TextStyle(fontSize: 15),
+                          '650 kCal',
+                          style: TextStyle(fontSize: 12),
                         ),
                       ],
                     ),
