@@ -1,36 +1,23 @@
 // ignore_for_file: file_names, depend_on_referenced_packages, avoid_print
-
 import 'package:blinkit/screens/orderPlacedDialog.dart';
 import 'package:blinkit/widgets/ButtonWidget.dart';
 import 'package:blinkit/widgets/customTextFormFieldWidget2.dart';
 import 'package:flutter/material.dart';
 import 'package:blinkit/style/dimension.dart';
 import 'package:blinkit/style/const.dart';
-import 'package:video_player/video_player.dart';
 
 class CartScreen extends StatefulWidget {
   final List<dynamic> cartItems;
+  final Map<int, bool> showCounter;
 
-  const CartScreen({super.key, required this.cartItems});
+  const CartScreen(
+      {super.key, required this.cartItems, required this.showCounter});
 
   @override
   State<CartScreen> createState() => _CartScreenState();
 }
 
 class _CartScreenState extends State<CartScreen> {
-  late VideoPlayerController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller =
-        VideoPlayerController.asset('assets/images/Payment Success.mp4')
-          ..initialize().then((_) {
-            setState(() {});
-            _controller.play();
-          });
-  }
-
   static const int shippingCost = 10;
   void _removeItem(product) {
     setState(() {

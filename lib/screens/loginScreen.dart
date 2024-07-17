@@ -15,16 +15,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  double _topPosition = 0;
-  double _leftPosition = 0;
-
-  void _moveImage() {
-    setState(() {
-      _topPosition = _topPosition == 0 ? 400 : 0;
-      _leftPosition = _leftPosition == 0 ? 300 : 0;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Consumer<loginProvider>(
@@ -41,14 +31,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         Stack(
                           children: [
-                            AnimatedContainer(
-                              duration: const Duration(seconds: 10),
-                              margin: EdgeInsets.only(
-                                  top: _topPosition, left: _leftPosition),
-                              child: GestureDetector(
-                                onTap: _moveImage,
-                                child: Image.asset(
-                                    'assets/images/cropped-blinkit2.png'),
+                            Center(
+                              child: Image.asset(
+                                'assets/images/login_page.jpg',
+                                height: 500,
+                                fit: BoxFit.contain,
                               ),
                             ),
                             Positioned(

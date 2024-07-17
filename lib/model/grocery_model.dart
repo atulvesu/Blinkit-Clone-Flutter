@@ -28,7 +28,7 @@ class GroceryModel {
                 'https://images.unsplash.com/photo-1558818498-28c1e002b655?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8VmVnZXRhYmxlc3xlbnwwfHwwfHx8MA%3D%3D',
             oldPrice: 69,
             price: 53,
-            name: 'Tomato(Tamater)',
+            name: 'Tomato',
             description:
                 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. ',
           ),
@@ -38,7 +38,7 @@ class GroceryModel {
                   'https://plus.unsplash.com/premium_photo-1677528816982-673398569f03?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8UG90YXRvfGVufDB8fDB8fHww',
               oldPrice: 100,
               price: 150,
-              name: 'Potato(Aloo)',
+              name: 'Potato',
               description:
                   'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. '),
           Product(
@@ -309,3 +309,15 @@ class Recommendation {
 
   Recommendation({required this.id, required this.img, required this.text});
 }
+
+
+
+
+
+
+// class CartItem {
+//   final Product product;
+//   int quantity;
+
+//   CartItem({required this.product, this.quantity = 1});
+// }
