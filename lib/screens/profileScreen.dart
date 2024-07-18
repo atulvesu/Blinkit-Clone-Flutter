@@ -1,8 +1,10 @@
 // ignore_for_file: file_names
 
 import 'package:blinkit/screens/accountPrivacyScreen.dart';
+import 'package:blinkit/screens/chatuiScreen.dart';
 import 'package:blinkit/screens/loginScreen.dart';
 import 'package:blinkit/screens/orderScreen.dart';
+import 'package:blinkit/screens/paymentSettingScreen.dart';
 import 'package:blinkit/screens/walletScreen.dart';
 import 'package:blinkit/style/dimension.dart';
 import 'package:flutter/material.dart';
@@ -83,7 +85,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ChatuiScreeen(),
+                        ));
+                  },
                   child: const Column(
                     children: [
                       Icon(Icons.wallet),
@@ -91,11 +99,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ],
                   ),
                 ),
-                const Column(
-                  children: [
-                    Icon(Icons.wallet),
-                    Text('Payment'),
-                  ],
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PaymentsettingScreen(),
+                        ));
+                  },
+                  child: const Column(
+                    children: [
+                      Icon(Icons.wallet),
+                      Text('Payment'),
+                    ],
+                  ),
                 )
               ],
             ),

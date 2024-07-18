@@ -117,3 +117,15 @@ const textFormFieldStyle =
 
 const orderStyle =
     TextStyle(color: Colors.green, fontSize: 14, fontFamily: 'Poppins-Regular');
+
+const card1 =
+    TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.w800);
+
+const card2 =
+    TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.w500);
+
+const card3 =
+    TextStyle(color: Colors.green, fontSize: 14, fontWeight: FontWeight.w500);
+
+const card4 =
+    TextStyle(color: Colors.black, fontSize: 12, fontWeight: FontWeight.w500);

@@ -6,6 +6,7 @@ import 'package:blinkit/model/grocery_model.dart';
 import 'package:blinkit/model/home_model.dart';
 import 'package:blinkit/model/snacks_model.dart';
 import 'package:blinkit/screens/custom_grid.dart';
+import 'package:blinkit/screens/nestedGridScreen.dart';
 import 'package:blinkit/screens/profileScreen.dart';
 import 'package:blinkit/style/dimension.dart';
 import 'package:flutter/material.dart';
@@ -93,7 +94,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         Text('Bestsellers', style: bstSellerStyle),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //       builder: (context) =>
+                            //           NestedGridScreen(model: GroceryModel),
+                            //     ));
+                          },
                           child: Text('See all', style: bstSellerStyle),
                         ),
                       ],

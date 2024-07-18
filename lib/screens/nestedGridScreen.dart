@@ -19,200 +19,488 @@ class _NestedGridScreenState extends State<NestedGridScreen> {
   List<dynamic> cartItems = [];
   Map<int, int> productQuantities = {};
   Map<int, bool> showCounter = {};
-  bool _isAddedToCart = false;
 
   void addToCart(product) {
     setState(() {
       if (!cartItems.contains(product)) {
         cartItems.add(product);
-        _isAddedToCart = true;
       }
       showCounter[product.id] = true;
       productQuantities[product.id] = (productQuantities[product.id] ?? 0) + 1;
     });
   }
 
+  // void showProductDetails(product) {
+  //   showModalBottomSheet(
+  //     isScrollControlled: true,
+  //     context: context,
+  //     builder: (context) {
+  //       return SingleChildScrollView(
+  //         child: Container(
+  //           color: const Color(0xff00FFFFFF),
+  //           child: Column(
+  //             children: [
+  //               Container(
+  //                 decoration: BoxDecoration(
+  //                   borderRadius: BorderRadius.circular(20),
+  //                   color: const Color(0xff00ffffff),
+  //                 ),
+  //                 child: Column(
+  //                   children: [
+  //                     Column(
+  //                       mainAxisSize: MainAxisSize.max,
+  //                       crossAxisAlignment: CrossAxisAlignment.start,
+  //                       children: [
+  //                         Center(
+  //                           child: ClipRRect(
+  //                             borderRadius: const BorderRadius.only(
+  //                                 topLeft: Radius.circular(20),
+  //                                 topRight: Radius.circular(20)),
+  //                             child: Image.network(
+  //                               product.img,
+  //                               height: Dimensions.height(200),
+  //                               width: double.infinity,
+  //                               fit: BoxFit.cover,
+  //                               errorBuilder: (context, error, stackTrace) =>
+  //                                   const Icon(Icons.error),
+  //                               loadingBuilder:
+  //                                   (context, child, loadingProgress) {
+  //                                 if (loadingProgress == null) return child;
+  //                                 return Center(
+  //                                   child: CircularProgressIndicator(
+  //                                     value:
+  //                                         loadingProgress.expectedTotalBytes !=
+  //                                                 null
+  //                                             ? loadingProgress
+  //                                                     .cumulativeBytesLoaded /
+  //                                                 (loadingProgress
+  //                                                         .expectedTotalBytes ??
+  //                                                     1)
+  //                                             : null,
+  //                                   ),
+  //                                 );
+  //                               },
+  //                             ),
+  //                           ),
+  //                         ),
+  //                         SizedBox(height: Dimensions.height(10)),
+  //                         Padding(
+  //                           padding: const EdgeInsets.symmetric(horizontal: 20),
+  //                           child: Text(
+  //                             product.name,
+  //                             style: bstSellerStyle,
+  //                           ),
+  //                         ),
+  //                         SizedBox(height: Dimensions.height(10)),
+  //                         Padding(
+  //                           padding: const EdgeInsets.symmetric(horizontal: 20),
+  //                           child: Text(
+  //                             'Price: ₹${product.price.toString()}',
+  //                             style: bstSeller2Style,
+  //                           ),
+  //                         ),
+  //                         SizedBox(height: Dimensions.height(10)),
+  //                         Padding(
+  //                           padding: const EdgeInsets.symmetric(horizontal: 20),
+  //                           child: Text(
+  //                             'Old Price: ₹${product.oldPrice}',
+  //                             style: oldPrice,
+  //                           ),
+  //                         ),
+  //                         SizedBox(height: Dimensions.height(10)),
+  //                         Padding(
+  //                           padding: const EdgeInsets.symmetric(horizontal: 20),
+  //                           child: Text(
+  //                             'Description: ${product.description}',
+  //                             style:
+  //                                 TextStyle(fontSize: Dimensions.fontSize(12)),
+  //                           ),
+  //                         ),
+  //                         SizedBox(height: Dimensions.height(10)),
+  //                         Padding(
+  //                           padding: const EdgeInsets.symmetric(horizontal: 20),
+  //                           child: InkWell(
+  //                             onTap: () {
+  //                               addToCart(product);
+  //                               Navigator.pop(context);
+  //                             },
+  //                             child: Container(
+  //                                 decoration: BoxDecoration(
+  //                                   borderRadius: BorderRadius.circular(10),
+  //                                   border: Border.all(
+  //                                     color: _isAddedToCart
+  //                                         ? Colors.white
+  //                                         : Colors.green,
+  //                                   ),
+  //                                 ),
+  //                                 padding: const EdgeInsets.symmetric(
+  //                                     vertical: 10, horizontal: 10),
+  //                                 width: double.infinity,
+  //                                 child: Text(
+  //                                   textAlign: TextAlign.center,
+  //                                   'Add to cart',
+  //                                   style: TextStyle(
+  //                                       fontSize: Dimensions.fontSize(12),
+  //                                       color: _isAddedToCart
+  //                                           ? Colors.white
+  //                                           : Colors.green),
+  //                                 )),
+  //                           ),
+  //                         ),
+  //                         const SizedBox(
+  //                           height: 20,
+  //                         ),
+  //                         const Padding(
+  //                           padding: EdgeInsets.symmetric(horizontal: 20),
+  //                           child: Text(
+  //                             'Online Recipes for you',
+  //                             style: TextStyle(
+  //                                 fontSize: 14,
+  //                                 fontWeight: FontWeight.w500,
+  //                                 color: Colors.black),
+  //                           ),
+  //                         ),
+  //                         SizedBox(
+  //                           height: Dimensions.height(120),
+  //                           child: ListView.builder(
+  //                             itemCount: 6,
+  //                             shrinkWrap: true,
+  //                             scrollDirection: Axis.horizontal,
+  //                             itemBuilder: (context, index) {
+  //                               return Padding(
+  //                                 padding: const EdgeInsets.all(10.0),
+  //                                 child: InkWell(
+  //                                   onTap: () {
+  //                                     Navigator.push(
+  //                                         context,
+  //                                         MaterialPageRoute(
+  //                                           builder: (context) =>
+  //                                               const FoodRepScreen(),
+  //                                         ));
+  //                                   },
+  //                                   child: Column(
+  //                                     children: [
+  //                                       ClipRRect(
+  //                                         borderRadius:
+  //                                             BorderRadius.circular(10),
+  //                                         child: Image.network(
+  //                                             'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fEZvb2R8ZW58MHx8MHx8fDA%3D',
+  //                                             height: 50,
+  //                                             width: 50,
+  //                                             fit: BoxFit.cover),
+  //                                       ),
+  //                                       const SizedBox(
+  //                                         height: 10,
+  //                                       ),
+  //                                       const Text(
+  //                                         'Lorem Ip',
+  //                                         style: TextStyle(fontSize: 12),
+  //                                       )
+  //                                     ],
+  //                                   ),
+  //                                 ),
+  //                               );
+  //                             },
+  //                           ),
+  //                         )
+  //                       ],
+  //                     ),
+  //                   ],
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
+
   void showProductDetails(product) {
     showModalBottomSheet(
       isScrollControlled: true,
       context: context,
       builder: (context) {
-        return SingleChildScrollView(
-          child: Container(
-            color: const Color(0xff00FFFFFF),
-            child: Column(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: const Color(0xff00ffffff),
-                  ),
-                  child: Column(
-                    children: [
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Center(
-                            child: ClipRRect(
-                              borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(20),
-                                  topRight: Radius.circular(20)),
-                              child: Image.network(
-                                product.img,
-                                height: Dimensions.height(200),
-                                width: double.infinity,
-                                fit: BoxFit.cover,
-                                errorBuilder: (context, error, stackTrace) =>
-                                    const Icon(Icons.error),
-                                loadingBuilder:
-                                    (context, child, loadingProgress) {
-                                  if (loadingProgress == null) return child;
-                                  return Center(
-                                    child: CircularProgressIndicator(
-                                      value:
-                                          loadingProgress.expectedTotalBytes !=
-                                                  null
-                                              ? loadingProgress
-                                                      .cumulativeBytesLoaded /
-                                                  (loadingProgress
-                                                          .expectedTotalBytes ??
-                                                      1)
-                                              : null,
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setModalState) {
+            void addToCartModal(product) {
+              setModalState(() {
+                if (!cartItems.contains(product)) {
+                  cartItems.add(product);
+                }
+                showCounter[product.id] = true;
+                productQuantities[product.id] =
+                    (productQuantities[product.id] ?? 0) + 1;
+              });
+              setState(() {});
+            }
+
+            void incrementQuantity() {
+              setModalState(() {
+                productQuantities[product.id] =
+                    (productQuantities[product.id] ?? 0) + 1;
+              });
+              setState(() {});
+            }
+
+            void decrementQuantity() {
+              setModalState(() {
+                if (productQuantities[product.id] != null &&
+                    productQuantities[product.id]! > 0) {
+                  productQuantities[product.id] =
+                      productQuantities[product.id]! - 1;
+                  if (productQuantities[product.id] == 0) {
+                    cartItems.remove(product);
+                    showCounter[product.id] = false;
+                  }
+                }
+              });
+              setState(() {});
+            }
+
+            return SingleChildScrollView(
+                child: Container(
+              color: const Color(0xff00FFFFFF),
+              child: Column(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: const Color(0xff00ffffff),
+                    ),
+                    child: Column(
+                      children: [
+                        Column(
+                          mainAxisSize: MainAxisSize.max,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Center(
+                              child: ClipRRect(
+                                borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(20),
+                                    topRight: Radius.circular(20)),
+                                child: Image.network(
+                                  product.img,
+                                  height: Dimensions.height(200),
+                                  width: double.infinity,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) =>
+                                      const Icon(Icons.error),
+                                  loadingBuilder:
+                                      (context, child, loadingProgress) {
+                                    if (loadingProgress == null) return child;
+                                    return Center(
+                                      child: CircularProgressIndicator(
+                                        value: loadingProgress
+                                                    .expectedTotalBytes !=
+                                                null
+                                            ? loadingProgress
+                                                    .cumulativeBytesLoaded /
+                                                (loadingProgress
+                                                        .expectedTotalBytes ??
+                                                    1)
+                                            : null,
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: Dimensions.height(10)),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              child: Text(
+                                product.name,
+                                style: bstSellerStyle,
+                              ),
+                            ),
+                            SizedBox(height: Dimensions.height(10)),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              child: Text(
+                                'Price: ₹${product.price.toString()}',
+                                style: bstSeller2Style,
+                              ),
+                            ),
+                            SizedBox(height: Dimensions.height(10)),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              child: Text(
+                                'Old Price: ₹${product.oldPrice}',
+                                style: oldPrice,
+                              ),
+                            ),
+                            SizedBox(height: Dimensions.height(10)),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              child: Text(
+                                'Description: ${product.description}',
+                                style: TextStyle(
+                                    fontSize: Dimensions.fontSize(12)),
+                              ),
+                            ),
+                            SizedBox(height: Dimensions.height(10)),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              child: Column(
+                                children: [
+                                  if (showCounter[product.id] != true)
+                                    InkWell(
+                                      onTap: () {
+                                        addToCartModal(product);
+                                        Navigator.pop(context);
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          border: Border.all(
+                                            color: Colors.green,
+                                          ),
+                                        ),
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 10, horizontal: 10),
+                                        width: double.infinity,
+                                        child: Text(
+                                          textAlign: TextAlign.center,
+                                          'Add to cart',
+                                          style: TextStyle(
+                                              fontSize: Dimensions.fontSize(12),
+                                              color: Colors.black),
+                                        ),
+                                      ),
+                                    ),
+                                  if (showCounter[product.id] == true)
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 4),
+                                      decoration: BoxDecoration(
+                                        color: Colors.teal,
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          GestureDetector(
+                                            onTap: decrementQuantity,
+                                            child: Container(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 10),
+                                              decoration: const BoxDecoration(
+                                                color: Colors.teal,
+                                                shape: BoxShape.rectangle,
+                                              ),
+                                              child: const Text(
+                                                '-',
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
+                                          ),
+                                          Text(
+                                            productQuantities[product.id]
+                                                    ?.toString() ??
+                                                '0',
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                          GestureDetector(
+                                            onTap: incrementQuantity,
+                                            child: Container(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 10),
+                                              decoration: const BoxDecoration(
+                                                color: Colors.teal,
+                                                shape: BoxShape.rectangle,
+                                              ),
+                                              child: const Text(
+                                                '+',
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+                            const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              child: Text(
+                                'Online Recipes for you',
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black),
+                              ),
+                            ),
+                            SizedBox(
+                              height: Dimensions.height(120),
+                              child: ListView.builder(
+                                itemCount: 6,
+                                shrinkWrap: true,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const FoodRepScreen(),
+                                            ));
+                                      },
+                                      child: Column(
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            child: Image.network(
+                                              'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fEZvb2R8ZW58MHx8MHx8fDA%3D',
+                                              height: 50,
+                                              width: 50,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 10),
+                                          const Text(
+                                            'Lorem Ip',
+                                            style: TextStyle(fontSize: 12),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   );
                                 },
                               ),
                             ),
-                          ),
-                          SizedBox(height: Dimensions.height(10)),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: Text(
-                              product.name,
-                              style: bstSellerStyle,
-                            ),
-                          ),
-                          SizedBox(height: Dimensions.height(10)),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: Text(
-                              'Price: ₹${product.price.toString()}',
-                              style: bstSeller2Style,
-                            ),
-                          ),
-                          SizedBox(height: Dimensions.height(10)),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: Text(
-                              'Old Price: ₹${product.oldPrice}',
-                              style: oldPrice,
-                            ),
-                          ),
-                          SizedBox(height: Dimensions.height(10)),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: Text(
-                              'Description: ${product.description}',
-                              style:
-                                  TextStyle(fontSize: Dimensions.fontSize(12)),
-                            ),
-                          ),
-                          SizedBox(height: Dimensions.height(10)),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: InkWell(
-                              onTap: () {
-                                addToCart(product);
-                                Navigator.pop(context);
-                              },
-                              child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    border: Border.all(
-                                      color: _isAddedToCart
-                                          ? Colors.white
-                                          : Colors.green,
-                                    ),
-                                  ),
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 10, horizontal: 10),
-                                  width: double.infinity,
-                                  child: Text(
-                                    textAlign: TextAlign.center,
-                                    'Add to cart',
-                                    style: TextStyle(
-                                        fontSize: Dimensions.fontSize(12),
-                                        color: _isAddedToCart
-                                            ? Colors.white
-                                            : Colors.green),
-                                  )),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 20),
-                            child: Text(
-                              'Online Recipes for you',
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black),
-                            ),
-                          ),
-                          SizedBox(
-                            height: Dimensions.height(120),
-                            child: ListView.builder(
-                              itemCount: 6,
-                              shrinkWrap: true,
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                return Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: InkWell(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const FoodRepScreen(),
-                                          ));
-                                    },
-                                    child: Column(
-                                      children: [
-                                        ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          child: Image.network(
-                                              'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fEZvb2R8ZW58MHx8MHx8fDA%3D',
-                                              height: 50,
-                                              width: 50,
-                                              fit: BoxFit.cover),
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        const Text(
-                                          'Lorem Ip',
-                                          style: TextStyle(fontSize: 12),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ));
+          },
         );
       },
     );
@@ -593,6 +881,7 @@ class _NestedGridScreenState extends State<NestedGridScreen> {
                           builder: (context) => CartScreen(
                             cartItems: cartItems,
                             showCounter: showCounter,
+                            productQuantities: productQuantities,
                           ),
                         ),
                       );

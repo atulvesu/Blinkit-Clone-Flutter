@@ -23,10 +23,10 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             children: [
               Expanded(
-                child: SingleChildScrollView(
-                  physics: const NeverScrollableScrollPhysics(),
-                  child: Padding(
-                    padding: const EdgeInsets.all(5.0),
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: SingleChildScrollView(
+                    physics: NeverScrollableScrollPhysics(),
                     child: Column(
                       children: [
                         Stack(
@@ -34,8 +34,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             Center(
                               child: Image.asset(
                                 'assets/images/login_page.jpg',
-                                height: 500,
                                 fit: BoxFit.contain,
+                                height: 500,
                               ),
                             ),
                             Positioned(

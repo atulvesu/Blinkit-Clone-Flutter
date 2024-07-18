@@ -9,9 +9,13 @@ import 'package:blinkit/style/const.dart';
 class CartScreen extends StatefulWidget {
   final List<dynamic> cartItems;
   final Map<int, bool> showCounter;
+  final Map<int, int> productQuantities;
 
   const CartScreen(
-      {super.key, required this.cartItems, required this.showCounter});
+      {super.key,
+      required this.cartItems,
+      required this.showCounter,
+      required this.productQuantities});
 
   @override
   State<CartScreen> createState() => _CartScreenState();
@@ -19,34 +23,53 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   static const int shippingCost = 10;
+
   void _removeItem(product) {
     setState(() {
       widget.cartItems.remove(product);
+      widget.showCounter[product.id] = false;
+      widget.productQuantities.remove(product.id);
     });
   }
 
-  int? _calculateTotalBill() {
-    int? total = 0;
-    for (var product in widget.cartItems) {
-      total = (total! + product.price) as int?;
-      print(total);
-    }
+  void incrementQuantity(product) {
+    setState(() {
+      widget.productQuantities[product.id] =
+          (widget.productQuantities[product.id] ?? 0) + 1;
+    });
+  }
 
+  void decrementQuantity(product) {
+    setState(() {
+      if (widget.productQuantities[product.id]! > 1) {
+        widget.productQuantities[product.id] =
+            widget.productQuantities[product.id]! - 1;
+      } else {
+        _removeItem(product);
+      }
+    });
+  }
+
+  double? _calculateTotalBill() {
+    double total = 0;
+    for (var product in widget.cartItems) {
+      total += product.price * (widget.productQuantities[product.id] ?? 1);
+    }
     return total;
   }
 
-  int? _calculateTotalBill2() {
-    int? totalBill = _calculateTotalBill();
-    int abc = totalBill! + shippingCost;
+  double? _calculateTotalBill2() {
+    double totalBill = _calculateTotalBill()!;
+    double abc = totalBill + shippingCost;
     return abc;
   }
 
   @override
   Widget build(BuildContext context) {
     final coupon = TextEditingController();
-    int? totalBill = _calculateTotalBill();
-    int? finalBill = _calculateTotalBill2();
-    // bool isCartEmpty = widget.cartItems.isEmpty;
+    double? totalBill = _calculateTotalBill();
+    double? finalBill = _calculateTotalBill2();
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xff16BE47),
@@ -107,32 +130,106 @@ class _CartScreenState extends State<CartScreen> {
                             itemCount: widget.cartItems.length,
                             itemBuilder: (context, index) {
                               final product = widget.cartItems[index];
-                              return ListTile(
-                                leading: Image.network(
-                                  product.img,
-                                  height: 100,
-                                  width: 100,
-                                  fit: BoxFit.cover,
-                                ),
-                                title:
-                                    Text(product.name, style: bstSellerStyle),
-                                subtitle: Text('₹ ${product.price.toString()}',
-                                    style: bstSeller2Style),
-                                trailing: InkWell(
-                                  onTap: () {
-                                    _removeItem(product);
-                                  },
-                                  child: const Icon(
-                                    Icons.delete,
-                                    color: Colors.red,
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ListTile(
+                                    leading: Image.network(
+                                      product.img,
+                                      height: 100,
+                                      width: 100,
+                                      fit: BoxFit.cover,
+                                    ),
+                                    title: Text(product.name,
+                                        style: bstSellerStyle),
+                                    subtitle: Text(
+                                      '₹ ${product.price.toString()}',
+                                      style: bstSeller2Style,
+                                    ),
+                                    // trailing: InkWell(
+                                    //   onTap: () {
+                                    //     _removeItem(product);
+                                    //   },
+                                    //   child: const Icon(
+                                    //     Icons.delete,
+                                    //     color: Colors.red,
+                                    //   ),
+                                    // ),
+                                    trailing: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20),
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 4, horizontal: 5),
+                                        decoration: BoxDecoration(
+                                          color: Colors.teal,
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                        ),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () =>
+                                                  decrementQuantity(product),
+                                              child: Container(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 10),
+                                                decoration: const BoxDecoration(
+                                                  color: Colors.teal,
+                                                  shape: BoxShape.rectangle,
+                                                ),
+                                                child: const Text(
+                                                  '-',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                            ),
+                                            Text(
+                                              widget.productQuantities[
+                                                          product.id]
+                                                      ?.toString() ??
+                                                  '0',
+                                              style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            GestureDetector(
+                                              onTap: () =>
+                                                  incrementQuantity(product),
+                                              child: Container(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 10),
+                                                decoration: const BoxDecoration(
+                                                  color: Colors.teal,
+                                                  shape: BoxShape.rectangle,
+                                                ),
+                                                child: const Text(
+                                                  '+',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                ],
                               );
                             },
                           ),
-                          const SizedBox(
-                            height: 10,
-                          ),
+                          const SizedBox(height: 10),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             child: Text(
@@ -178,7 +275,7 @@ class _CartScreenState extends State<CartScreen> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     const Text('Item Subtotal'),
-                                    Text(totalBill.toString()),
+                                    Text('₹ ${totalBill.toString()}'),
                                   ],
                                 ),
                                 Row(
@@ -186,7 +283,7 @@ class _CartScreenState extends State<CartScreen> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     const Text('Shipping Costs'),
-                                    Text(shippingCost.toString()),
+                                    Text('₹ ${shippingCost.toString()}'),
                                   ],
                                 ),
                                 Row(
@@ -194,7 +291,7 @@ class _CartScreenState extends State<CartScreen> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     const Text('Total Bill:'),
-                                    Text(finalBill.toString()),
+                                    Text('₹ ${finalBill.toString()}'),
                                   ],
                                 ),
                                 SizedBox(
