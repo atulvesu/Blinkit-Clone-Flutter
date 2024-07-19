@@ -1,16 +1,17 @@
 // ignore_for_file: file_names, use_super_parameters
-
 import 'dart:math';
 import 'package:blinkit/model/bath_model.dart';
 import 'package:blinkit/model/grocery_model.dart';
 import 'package:blinkit/model/home_model.dart';
 import 'package:blinkit/model/snacks_model.dart';
 import 'package:blinkit/screens/custom_grid.dart';
-import 'package:blinkit/screens/nestedGridScreen.dart';
+import 'package:blinkit/screens/homeScreen2.dart';
 import 'package:blinkit/screens/profileScreen.dart';
 import 'package:blinkit/style/dimension.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:blinkit/style/const.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -20,13 +21,28 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final urlImages = [
+    "https://images.unsplash.com/photo-1526470498-9ae73c665de8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8R1JPQ0VSWSUyMGhvcml6b250YWwlMjBpbWFnZXxlbnwwfHwwfHx8MA%3D%3D",
+    "https://media.istockphoto.com/id/1015858612/photo/supermarket-interior-with-shelves-full-of-various-products.webp?b=1&s=170667a&w=0&k=20&c=oGH_HSothrfTk1uvS7PTCAEjhY9I1Y94rpj8wtRPOqU=",
+    "https://media.istockphoto.com/id/1213535077/photo/happy-family-shopping-for-groceries-at-the-supermarket.webp?b=1&s=170667a&w=0&k=20&c=nbAlMbVp9FwjLTbQSVRhbzU7SAO4DZovmeAeaSiNkVo=",
+    "https://images.unsplash.com/photo-1695654390723-479197a8c4a3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fEdST0NFUlklMjBob3Jpem9udGFsJTIwaW1hZ2V8ZW58MHx8MHx8fDA%3D",
+  ];
+  final CarouselController carouselController = CarouselController();
+
+  int _current = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.black,
         shape: const CircleBorder(),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const Homescreen2(),
+              ));
+        },
         child: Padding(
           padding: EdgeInsets.all(Dimensions.padding(4)),
           child: Column(
@@ -51,31 +67,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      // floatingActionButton: Container(
-      //   height: MediaQuery.of(context).size.width * 0.5,
-      //   width: MediaQuery.of(context).size.width * 0.14,
-      //   child: FloatingActionButton(
-      //     shape: CircleBorder(),
-      //     onPressed: () {},
-      //     child: Column(
-      //       mainAxisAlignment: MainAxisAlignment.center,
-      //       crossAxisAlignment: CrossAxisAlignment.center,
-      //       children: [
-      //         Icon(
-      //           Icons.category,
-      //           color: Colors.white,
-      //         ),
-      //         Text(
-      //           'CATEGORY',
-      //           style: TextStyle(
-      //               fontSize: 5,
-      //               color: Colors.white,
-      //               fontWeight: FontWeight.w500),
-      //         )
-      //       ],
-      //     ),
-      //   ),
-      // ),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: CustomScrollView(
@@ -86,74 +77,124 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: Dimensions.padding(16)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('Bestsellers', style: bstSellerStyle),
-                        TextButton(
-                          onPressed: () {
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //       builder: (context) =>
-                            //           NestedGridScreen(model: GroceryModel),
-                            //     ));
-                          },
-                          child: Text('See all', style: bstSellerStyle),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: Dimensions.height(230),
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 6,
-                      itemBuilder: (context, index) => Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5)),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 2, vertical: 5),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: Image.asset('assets/images/Untitled.png'),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              'Chips & Crips',
-                              style: bstSeller2Style,
-                            ),
-                            Text(
-                              '13 products',
-                              style: bstSeller2Style,
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 2),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  border:
-                                      Border.all(color: Colors.green.shade200)),
-                              child: Text(
-                                'See all',
-                                style: seeAllbtn,
+                  // Padding(
+                  //   padding: EdgeInsets.symmetric(
+                  //       horizontal: Dimensions.padding(16)),
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //     children: [
+                  //       Text('Bestsellers', style: bstSellerStyle),
+                  //       TextButton(
+                  //         onPressed: () {},
+                  //         child: Text('See all', style: bstSellerStyle),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   height: Dimensions.height(230),
+                  //   child: ListView.builder(
+                  //     shrinkWrap: true,
+                  //     scrollDirection: Axis.horizontal,
+                  //     itemCount: 6,
+                  //     itemBuilder: (context, index) => Container(
+                  //       decoration: BoxDecoration(
+                  //           borderRadius: BorderRadius.circular(5)),
+                  //       padding: const EdgeInsets.symmetric(
+                  //           horizontal: 2, vertical: 5),
+                  //       child: Column(
+                  //         crossAxisAlignment: CrossAxisAlignment.center,
+                  //         children: [
+                  //           Expanded(
+                  //             child: Image.asset('assets/images/Untitled.png'),
+                  //           ),
+                  //           const SizedBox(
+                  //             height: 5,
+                  //           ),
+                  //           Text(
+                  //             'Chips & Crips',
+                  //             style: bstSeller2Style,
+                  //           ),
+                  //           Text(
+                  //             '13 products',
+                  //             style: bstSeller2Style,
+                  //           ),
+                  //           const SizedBox(
+                  //             height: 10,
+                  //           ),
+                  //           Container(
+                  //             padding: const EdgeInsets.symmetric(
+                  //                 horizontal: 20, vertical: 2),
+                  //             decoration: BoxDecoration(
+                  //                 borderRadius: BorderRadius.circular(5),
+                  //                 border:
+                  //                     Border.all(color: Colors.green.shade200)),
+                  //             child: Text(
+                  //               'See all',
+                  //               style: seeAllbtn,
+                  //             ),
+                  //           )
+                  //         ],
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  Stack(
+                    children: [
+                      SizedBox(
+                        height: 150,
+                        child: CarouselSlider.builder(
+                          itemCount: urlImages.length,
+                          itemBuilder: (context, index, realIndex) {
+                            final urlImage = urlImages[index];
+                            return Container(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              width: double.maxFinite,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(5),
+                                child: Image.network(
+                                  urlImage,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
-                            )
-                          ],
+                            );
+                          },
+                          options: CarouselOptions(
+                            autoPlay: true,
+                            autoPlayInterval: const Duration(seconds: 10),
+                            autoPlayAnimationDuration:
+                                const Duration(milliseconds: 1000),
+                            height: 200,
+                            aspectRatio: 16 / 9,
+                            enlargeCenterPage: true,
+                            viewportFraction: 1,
+                            onPageChanged: (index, reason) {
+                              setState(() {
+                                _current = index;
+                              });
+                            },
+                          ),
                         ),
                       ),
-                    ),
+                      Positioned(
+                        bottom: 10,
+                        left: 0,
+                        right: 0,
+                        child: Center(
+                          child: AnimatedSmoothIndicator(
+                            activeIndex: _current,
+                            count: urlImages.length,
+                            effect: const WormEffect(
+                              dotHeight: 8,
+                              dotWidth: 8,
+                              activeDotColor: Colors.green,
+                              dotColor: Colors.grey,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   CustomGrid(
                     items: GroceryModel.dummyData,

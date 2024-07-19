@@ -36,7 +36,7 @@ class _CustomGridState extends State<CustomGrid> {
           Text(widget.title, style: bstSellerStyle),
           SizedBox(height: Dimensions.height(10)),
           Container(
-            height: Dimensions.height(260),
+            height: Dimensions.height(275),
             padding: EdgeInsets.symmetric(vertical: Dimensions.padding(10)),
             child: GridView.builder(
               shrinkWrap: true,

@@ -119,7 +119,9 @@ class _FoodRepScreenState extends State<FoodRepScreen> {
                         Icon(Icons.receipt_outlined),
                         Text(
                           'Recipe',
-                          style: TextStyle(fontSize: 12),
+                          style: TextStyle(
+                            fontSize: 12,
+                          ),
                         ),
                       ],
                     ),

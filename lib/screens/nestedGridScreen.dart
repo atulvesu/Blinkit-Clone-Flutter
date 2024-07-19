@@ -1,5 +1,5 @@
 // ignore: unused_import
-// ignore_for_file: file_names, library_private_types_in_public_api
+// ignore_for_file: file_names, library_private_types_in_public_api, use_full_hex_values_for_flutter_colors, duplicate_ignore
 import 'package:blinkit/screens/foodRepScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:blinkit/screens/cartScreen.dart';
@@ -20,7 +20,16 @@ class _NestedGridScreenState extends State<NestedGridScreen> {
   Map<int, int> productQuantities = {};
   Map<int, bool> showCounter = {};
 
-  void addToCart(product) {
+  // void addToCart(product) {
+  //   setState(() {
+  //     if (!cartItems.contains(product)) {
+  //       cartItems.add(product);
+  //     }
+  //     showCounter[product.id] = true;
+  //     productQuantities[product.id] = (productQuantities[product.id] ?? 0) + 1;
+  //   });
+  // }
+  void addToCart(dynamic product) {
     setState(() {
       if (!cartItems.contains(product)) {
         cartItems.add(product);
@@ -29,6 +38,23 @@ class _NestedGridScreenState extends State<NestedGridScreen> {
       productQuantities[product.id] = (productQuantities[product.id] ?? 0) + 1;
     });
   }
+
+  void removeFromCart(dynamic product) {
+    setState(() {
+      if (productQuantities[product.id] != null &&
+          productQuantities[product.id]! > 0) {
+        productQuantities[product.id] = productQuantities[product.id]! - 1;
+        if (productQuantities[product.id] == 0) {
+          cartItems.remove(product);
+          showCounter[product.id] = false; // Hide counter if quantity is 0
+        }
+      }
+    });
+  }
+
+  // void Totalitem() {
+  //  int total = productQuantities.length + ;
+  // }
 
   // void showProductDetails(product) {
   //   showModalBottomSheet(
@@ -260,7 +286,8 @@ class _NestedGridScreenState extends State<NestedGridScreen> {
 
             return SingleChildScrollView(
                 child: Container(
-              color: const Color(0xff00FFFFFF),
+              // ignore: use_full_hex_values_for_flutter_colors
+              color: const Color(0xff00ffffff),
               child: Column(
                 children: [
                   Container(
@@ -721,8 +748,8 @@ class _NestedGridScreenState extends State<NestedGridScreen> {
                                               if (showCounter[products.id] ==
                                                   true)
                                                 Container(
-                                                  padding: EdgeInsets.symmetric(
-                                                      vertical: 4),
+                                                  padding: const EdgeInsets
+                                                      .symmetric(vertical: 4),
                                                   decoration: BoxDecoration(
                                                       color: Colors.teal,
                                                       borderRadius:
@@ -766,8 +793,9 @@ class _NestedGridScreenState extends State<NestedGridScreen> {
                                                         }),
                                                         // paste here
                                                         child: Container(
-                                                            padding: EdgeInsets
-                                                                .symmetric(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .symmetric(
                                                                     horizontal:
                                                                         10),
                                                             decoration: const BoxDecoration(
@@ -791,7 +819,7 @@ class _NestedGridScreenState extends State<NestedGridScreen> {
                                                                     products.id]
                                                                 ?.toString() ??
                                                             '0',
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                             color: Colors.white,
                                                             fontWeight:
                                                                 FontWeight
@@ -819,8 +847,9 @@ class _NestedGridScreenState extends State<NestedGridScreen> {
                                                                 // here
                                                                 ),
                                                         child: Container(
-                                                            padding: EdgeInsets
-                                                                .symmetric(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .symmetric(
                                                                     horizontal:
                                                                         10),
                                                             decoration: const BoxDecoration(
@@ -865,9 +894,17 @@ class _NestedGridScreenState extends State<NestedGridScreen> {
             child: Row(
               children: [
                 Expanded(
-                    child: Text(
+                    child:
+                        //      Text(
+                        //   textAlign: TextAlign.center,
+                        //   '${productQuantities.length} ITEMS',
+                        //   style: const TextStyle(
+                        //     fontSize: 14,
+                        //   ),
+                        // ),
+                        Text(
                   textAlign: TextAlign.center,
-                  '${cartItems.length} ITEMS',
+                  '${cartItems.fold(0, (total, item) => total + (productQuantities[item.id] ?? 0))} ITEMS',
                   style: const TextStyle(
                     fontSize: 14,
                   ),

@@ -22,7 +22,7 @@ class _SupportScreenState extends State<OrderScreen> {
         ),
       ),
       body: ListView.builder(
-        itemCount: 5,
+        itemCount: 1,
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.all(8.0),
@@ -59,10 +59,13 @@ class _SupportScreenState extends State<OrderScreen> {
                                   Text(
                                     'Arrived in 14 minutes',
                                     style: TextStyle(
-                                        fontSize: 20,
+                                        fontSize: 14,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  Text('₹309 · 28 Jun, 9:59 am'),
+                                  Text('₹309 · 28 Jun, 9:59 am',
+                                      style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w500)),
                                 ],
                               ),
                             ],

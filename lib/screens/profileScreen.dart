@@ -1,5 +1,4 @@
 // ignore_for_file: file_names
-
 import 'package:blinkit/screens/accountPrivacyScreen.dart';
 import 'package:blinkit/screens/chatuiScreen.dart';
 import 'package:blinkit/screens/loginScreen.dart';
@@ -46,15 +45,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Container(
-                margin: EdgeInsets.symmetric(vertical: Dimensions.margin(10)),
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.green),
-                    borderRadius: BorderRadius.circular(5)),
-                width: double.infinity,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                child: const Text(textAlign: TextAlign.center, 'Continue'),
+              child: InkWell(
+                onTap: () {
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LoginScreen(),
+                    ),
+                    (route) => false,
+                  );
+                },
+                child: Container(
+                  margin: EdgeInsets.symmetric(vertical: Dimensions.margin(10)),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.green),
+                      borderRadius: BorderRadius.circular(5)),
+                  width: double.infinity,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  child: const Text(textAlign: TextAlign.center, 'Continue'),
+                ),
               ),
             ),
           ],
@@ -89,7 +99,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ChatuiScreeen(),
+                          builder: (context) => const ChatuiScreeen(),
                         ));
                   },
                   child: const Column(
@@ -104,7 +114,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => PaymentsettingScreen(),
+                          builder: (context) => const PaymentsettingScreen(),
                         ));
                   },
                   child: const Column(
@@ -221,19 +231,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         InkWell(
           onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const LoginScreen(),
-                ));
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: (context) => LoginScreen(),
+              ),
+              (route) => false,
+            );
           },
           child: const ListTile(
             leading: Icon(Icons.book),
             title: Text('Logout'),
-            trailing: Icon(
-              Icons.arrow_forward_ios_rounded,
-              size: 15,
-            ),
           ),
         ),
       ]),

@@ -106,51 +106,82 @@ class _AccountPrivacyScreenState extends State<AccountPrivacyScreen> {
               InkWell(
                 onTap: () {
                   showDialog(
-                    barrierDismissible: false,
                     context: context,
                     builder: (context) {
-                      return StatefulBuilder(
-                        builder: (context, setStateDialog) {
-                          _startOrderProcess(setStateDialog);
-                          return AlertDialog(
-                            content: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                _isOrderPlaced
-                                    ? Column(
-                                        children: [
-                                          const Icon(Icons.check_circle,
-                                              color: Colors.green, size: 50),
-                                          const SizedBox(height: 20),
-                                          const Text(
-                                              'Account deleted successfully'),
-                                          const SizedBox(height: 20),
-                                          ElevatedButton(
-                                            onPressed: () {
-                                              Navigator.pushAndRemoveUntil(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        const LoginScreen(),
+                      return AlertDialog(
+                        title: const Text('Confirm Deletion'),
+                        content: const Text(
+                            'Are you sure you want to delete your account?'),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text('No'),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              showDialog(
+                                barrierDismissible: false,
+                                context: context,
+                                builder: (context) {
+                                  return StatefulBuilder(
+                                    builder: (context, setStateDialog) {
+                                      _startOrderProcess(setStateDialog);
+                                      return AlertDialog(
+                                        content: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            _isOrderPlaced
+                                                ? Column(
+                                                    children: [
+                                                      const Icon(
+                                                          Icons.check_circle,
+                                                          color: Colors.green,
+                                                          size: 50),
+                                                      const SizedBox(
+                                                          height: 20),
+                                                      const Text(
+                                                          'Account deleted successfully'),
+                                                      const SizedBox(
+                                                          height: 20),
+                                                      ElevatedButton(
+                                                        onPressed: () {
+                                                          Navigator
+                                                              .pushAndRemoveUntil(
+                                                                  context,
+                                                                  MaterialPageRoute(
+                                                                    builder:
+                                                                        (context) =>
+                                                                            const LoginScreen(),
+                                                                  ),
+                                                                  (Route<dynamic>
+                                                                          route) =>
+                                                                      false);
+                                                        },
+                                                        child: const Text('OK'),
+                                                      ),
+                                                    ],
+                                                  )
+                                                : const Column(
+                                                    children: [
+                                                      CircularProgressIndicator(),
+                                                      SizedBox(height: 20),
+                                                      Text('Deleting account'),
+                                                    ],
                                                   ),
-                                                  (Route<dynamic> route) =>
-                                                      false);
-                                            },
-                                            child: const Text('OK'),
-                                          ),
-                                        ],
-                                      )
-                                    : const Column(
-                                        children: [
-                                          CircularProgressIndicator(),
-                                          SizedBox(height: 20),
-                                          Text('Deleting account'),
-                                        ],
-                                      ),
-                              ],
-                            ),
-                          );
-                        },
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                              );
+                            },
+                            child: const Text('Yes'),
+                          ),
+                        ],
                       );
                     },
                   );
