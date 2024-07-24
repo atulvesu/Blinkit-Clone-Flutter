@@ -18,10 +18,13 @@ class _AppBarWidgetState extends State<AppBarWidget> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      backgroundColor: Colors.white,
+      // elevation: 1,
       leading: InkWell(
           onTap: widget.onPress,
           child: const Icon(
             Icons.arrow_back,
+            size: 15,
           )),
       title: Text(
         widget.title,

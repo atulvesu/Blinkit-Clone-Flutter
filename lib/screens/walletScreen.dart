@@ -12,22 +12,23 @@ class _WalletScreenState extends State<WalletScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffedb506),
       appBar: AppBar(
         title: const Text(
           'Wallet details',
           style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
         ),
       ),
-      body: Column(
+      body: const Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.network(
-              'https://images.unsplash.com/photo-1517849845537-4d257902454a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGRvZyUyMGFuZCUyMGh1bWFuJTIwY2FydG9vbiUyMHBuZ3xlbnwwfHwwfHx8MA%3D%3D'),
-          const Text(
-            'No balance',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
+          Center(
+            child: Text(
+              'No balance',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w300,
+              ),
             ),
           ),
         ],

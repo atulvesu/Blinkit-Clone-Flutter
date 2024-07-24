@@ -129,3 +129,9 @@ const card3 =
 
 const card4 =
     TextStyle(color: Colors.black, fontSize: 12, fontWeight: FontWeight.w500);
+
+const card5 =
+    TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.w500);
+
+const card6 =
+    TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.w900);

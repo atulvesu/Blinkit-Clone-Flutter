@@ -273,7 +273,20 @@ class PersistentHeader extends StatelessWidget {
 }
 
 // ignore: use_key_in_widget_constructors
-class CustomAppBar extends StatelessWidget {
+class CustomAppBar extends StatefulWidget {
+  @override
+  State<CustomAppBar> createState() => _CustomAppBarState();
+}
+
+class _CustomAppBarState extends State<CustomAppBar> {
+  String _selectedLocation = 'E Block, Sector 8, Meerut Division';
+
+  // List of dummy locations
+  final List<String> _locations = [
+    'E Block, Sector 8, Meerut Division',
+    'F Block, Sector 9, Meerut Division',
+    'G Block, Sector 10, Meerut Division',
+  ];
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
@@ -298,14 +311,35 @@ class CustomAppBar extends StatelessWidget {
               '11 minutes',
               style: apptxt2,
             ),
-            Row(
-              children: [
-                Text(
-                  'E Block, Sector 8, Meerut Division',
-                  style: apptxt3,
-                ),
-                const Icon(Icons.arrow_drop_down),
-              ],
+            InkWell(
+              onTap: () async {
+                final selectedLocation = await showMenu<String>(
+                  context: context,
+                  position: RelativeRect.fill,
+                  items: _locations.map((String location) {
+                    return PopupMenuItem<String>(
+                      value: location,
+                      child: Text(location),
+                    );
+                  }).toList(),
+                  elevation: 8.0,
+                );
+
+                if (selectedLocation != null) {
+                  setState(() {
+                    _selectedLocation = selectedLocation;
+                  });
+                }
+              },
+              child: Row(
+                children: [
+                  Text(
+                    _selectedLocation,
+                    style: apptxt3,
+                  ),
+                  const Icon(Icons.arrow_drop_down),
+                ],
+              ),
             ),
           ],
         ),

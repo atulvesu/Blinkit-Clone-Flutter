@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "871219908467",
+    "project_id": "signin-76c70",
+    "storage_bucket": "signin-76c70.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:871219908467:android:ec7bd09eef97bcb3213f06",
+        "android_client_info": {
+          "package_name": "com.example.blinkit"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBw0AXK3hTtLv_gw_1B12uk5YL2AIw_IVw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

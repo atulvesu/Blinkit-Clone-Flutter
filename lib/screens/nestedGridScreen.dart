@@ -380,7 +380,7 @@ class _NestedGridScreenState extends State<NestedGridScreen> {
                                     InkWell(
                                       onTap: () {
                                         addToCartModal(product);
-                                        Navigator.pop(context);
+                                        // Navigator.pop(context);
                                       },
                                       child: Container(
                                         decoration: BoxDecoration(

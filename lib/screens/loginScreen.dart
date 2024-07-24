@@ -1,8 +1,12 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, override_on_non_overriding_member, use_build_context_synchronously
 import 'package:blinkit/screens/WebViewScreen.dart';
 import 'package:blinkit/screens/homeScreen.dart';
+import 'package:blinkit/screens/nextScreen.dart';
 import 'package:blinkit/style/dimension.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:blinkit/provider/loginProvider.dart';
 import 'package:blinkit/style/const.dart';
@@ -17,6 +21,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  @override
   final _phoneNumberController = TextEditingController();
 
   bool isValidPhoneNumber(String phoneNumber) {
@@ -24,6 +29,80 @@ class _LoginScreenState extends State<LoginScreen> {
       r"^[6-9]\d{9}$",
     );
     return phoneRegExp.hasMatch(phoneNumber);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _printFCMToken();
+  }
+
+  Future<void> _printFCMToken() async {
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+    String? token = await messaging.getToken();
+    print("FCM Token: $token");
+  }
+
+  // Future<void> signInwithGoogle() async {
+  //   try {
+  //     GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+  //     GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+  //     AuthCredential credential = GoogleAuthProvider.credential(
+  //       accessToken: googleAuth?.accessToken,
+  //       idToken: googleAuth?.idToken,
+  //     );
+  //     UserCredential userCredential =
+  //         await FirebaseAuth.instance.signInWithCredential(credential);
+  //     print(userCredential.user?.displayName);
+
+  //     if (userCredential.user != null) {
+  //       // Retrieve and print FCM token
+  //       FirebaseMessaging messaging = FirebaseMessaging.instance;
+  //       String? token = await messaging.getToken();
+  //       print("FCM Token: $token");
+
+  //       Navigator.of(context).push(MaterialPageRoute(
+  //         builder: (context) => Nextscreen(),
+  //       ));
+  //     }
+  //   } catch (e) {
+  //     print("Error signing in with Google: $e");
+  //   }
+  // }
+
+  // second attempt
+  Future<void> signInwithGoogle(BuildContext context) async {
+    try {
+      GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      if (googleUser == null) {
+        print("Google sign-in aborted");
+        return;
+      }
+
+      GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+
+      if (userCredential.user != null) {
+        // Retrieve and print FCM token
+        print("hello  ${userCredential.user}");
+        FirebaseMessaging messaging = FirebaseMessaging.instance;
+        String? token = await messaging.getToken();
+        print("FCM Token: $token");
+
+        // Navigate to the next screen
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (context) => const Nextscreen(),
+        ));
+      }
+    } catch (e) {
+      print("Error signing in with Google: $e");
+    }
   }
 
   @override
@@ -196,7 +275,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 10),
+                            const SizedBox(height: 5),
+                            TextButton(
+                                onPressed: () {
+                                  signInwithGoogle(context);
+                                },
+                                child: const Text('Sign in with google')),
+                            const SizedBox(height: 5),
                           ],
                         ),
                       ),
