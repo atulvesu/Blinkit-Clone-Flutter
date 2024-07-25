@@ -10,7 +10,6 @@ import 'package:blinkit/screens/notificationPref.dart';
 import 'package:blinkit/screens/orderScreen.dart';
 import 'package:blinkit/screens/paymentSettingScreen.dart';
 import 'package:blinkit/screens/walletScreen.dart';
-import 'package:blinkit/style/const.dart';
 import 'package:blinkit/style/dimension.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
@@ -260,13 +259,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 isScrollControlled: true,
                 context: context,
                 builder: (context) {
-                  return CustomModal();
+                  return const CustomModal();
                 },
               );
             },
-            leading: Icon(Icons.lock),
-            title: Text('Get Feeding india receipt'),
-            trailing: Icon(
+            leading: const Icon(Icons.lock),
+            title: const Text('Get Feeding india receipt'),
+            trailing: const Icon(
               Icons.arrow_forward_ios_rounded,
               size: 15,
             ),
@@ -293,12 +292,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => Notificationpreferences(),
+                    builder: (context) => const Notificationpreferences(),
                   ));
             },
-            leading: Icon(Icons.notifications),
-            title: Text('Notification preferences'),
-            trailing: Icon(
+            leading: const Icon(Icons.notifications),
+            title: const Text('Notification preferences'),
+            trailing: const Icon(
               Icons.arrow_forward_ios_rounded,
               size: 15,
             ),
