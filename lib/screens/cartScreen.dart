@@ -5,17 +5,19 @@ import 'package:blinkit/widgets/customTextFormFieldWidget2.dart';
 import 'package:flutter/material.dart';
 import 'package:blinkit/style/dimension.dart';
 import 'package:blinkit/style/const.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class CartScreen extends StatefulWidget {
   final List<dynamic> cartItems;
   final Map<int, bool> showCounter;
   final Map<int, int> productQuantities;
 
-  const CartScreen(
-      {super.key,
-      required this.cartItems,
-      required this.showCounter,
-      required this.productQuantities});
+  const CartScreen({
+    super.key,
+    required this.cartItems,
+    required this.showCounter,
+    required this.productQuantities,
+  });
 
   @override
   State<CartScreen> createState() => _CartScreenState();
@@ -26,8 +28,54 @@ enum ContainerOption { option20, option30, option50, option100 }
 class _CartScreenState extends State<CartScreen> {
   static const int shippingCost = 10;
   bool check = false;
+  late Razorpay _razorpay;
 
   ContainerOption? selectedOption;
+  @override
+  void initState() {
+    super.initState();
+    _razorpay = Razorpay();
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+  }
+
+  @override
+  void dispose() {
+    _razorpay.clear();
+    super.dispose();
+  }
+
+  void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    // Handle payment success
+    print("Payment successful: ${response.paymentId}");
+  }
+
+  void _handlePaymentError(PaymentFailureResponse response) {
+    // Handle payment error
+    print("Payment failed: ${response.code} - ${response.message}");
+  }
+
+  void _handleExternalWallet(ExternalWalletResponse response) {
+    // Handle external wallet selection
+    print("External wallet selected: ${response.walletName}");
+  }
+
+  void openCheckout() {
+    var options = {
+      'key': 'testing',
+      'amount': 1000,
+      'name': 'Blinkit',
+      'description': 'Payment for your shopping',
+      'prefill': {'contact': '9123456789', 'email': 'example@domain.com'},
+    };
+
+    try {
+      _razorpay.open(options);
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 
   void onContainerTap(ContainerOption option) {
     setState(() {
@@ -100,7 +148,7 @@ class _CartScreenState extends State<CartScreen> {
         ),
       ),
       body: widget.cartItems.isEmpty
-          ? Center(
+          ? const Center(
               child: Text('Cart is Empty'),
             )
           : Column(
@@ -342,13 +390,13 @@ class _CartScreenState extends State<CartScreen> {
                           elevation: 2,
                           color: Colors.white,
                           child: ListTile(
-                            leading: Icon(Icons.accessibility_outlined),
+                            leading: const Icon(Icons.accessibility_outlined),
                             title: Text(
                               'Feeding India donation ₹1',
                               style: cartStyle,
                             ),
                             subtitle: Padding(
-                              padding: EdgeInsets.symmetric(vertical: 5),
+                              padding: const EdgeInsets.symmetric(vertical: 5),
                               child: Text(
                                 'Working towards a mainutrition free india.Feeding india is a not-a-profit organisation, working to solve hunger, maninutrition, and food wastage in India.',
                                 style: cartStyle2,
@@ -365,7 +413,7 @@ class _CartScreenState extends State<CartScreen> {
                           ),
                         ),
                         Padding(
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 horizontal: 5, vertical: 0),
                             child: Card(
                               elevation: 2,
@@ -376,7 +424,8 @@ class _CartScreenState extends State<CartScreen> {
                                   style: cartStyle,
                                 ),
                                 subtitle: Padding(
-                                    padding: EdgeInsets.symmetric(vertical: 5),
+                                    padding:
+                                        const EdgeInsets.symmetric(vertical: 5),
                                     child: Column(
                                       children: [
                                         Text(
@@ -474,7 +523,7 @@ class _CartScreenState extends State<CartScreen> {
                               ),
                             )),
                         Padding(
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 horizontal: 5, vertical: 0),
                             child: Card(
                               elevation: 2,
@@ -485,14 +534,20 @@ class _CartScreenState extends State<CartScreen> {
                                   style: cartStyle,
                                 ),
                                 subtitle: Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 5),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 5),
                                   child: Text(
                                     'Order can\'t be cancelled once packed for delivery. In case of unexpected delays, a refund will be provided, if applicable.',
                                     style: cartStyle2,
                                   ),
                                 ),
                               ),
-                            ))
+                            )),
+                        ElevatedButton(
+                            onPressed: () {
+                              openCheckout();
+                            },
+                            child: const Text('RazorPay'))
                       ],
                     ),
                   ),
@@ -503,12 +558,12 @@ class _CartScreenState extends State<CartScreen> {
                       context: context,
                       builder: (context) {
                         return Container(
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 vertical: 10, horizontal: 15),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Padding(
+                                const Padding(
                                   padding: EdgeInsets.symmetric(vertical: 10),
                                   child: Text(
                                     'Select address',
@@ -537,13 +592,13 @@ class _CartScreenState extends State<CartScreen> {
                                                   BorderRadius.circular(5)),
                                           child: const Icon(Icons.home)),
                                       title: const Text('Home'),
-                                      subtitle: Column(
+                                      subtitle: const Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          const Text(
+                                          Text(
                                               'Ground, B-121, Gautam Nagar, Noida'),
-                                          const SizedBox(
+                                          SizedBox(
                                             height: 5,
                                           ),
                                         ],
@@ -581,7 +636,7 @@ class _CartScreenState extends State<CartScreen> {
     return GestureDetector(
       onTap: () => onContainerTap(option),
       child: Container(
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         decoration: BoxDecoration(
           color: isSelected ? Colors.green : Colors.white,
           border: Border.all(

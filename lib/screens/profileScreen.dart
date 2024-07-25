@@ -4,10 +4,13 @@ import 'package:blinkit/screens/accountPrivacyScreen.dart';
 import 'package:blinkit/screens/addressScreen.dart';
 import 'package:blinkit/screens/chatuiScreen.dart';
 import 'package:blinkit/screens/collectedcoupons.dart';
+import 'package:blinkit/screens/customModal.dart';
 import 'package:blinkit/screens/loginScreen.dart';
+import 'package:blinkit/screens/notificationPref.dart';
 import 'package:blinkit/screens/orderScreen.dart';
 import 'package:blinkit/screens/paymentSettingScreen.dart';
 import 'package:blinkit/screens/walletScreen.dart';
+import 'package:blinkit/style/const.dart';
 import 'package:blinkit/style/dimension.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
@@ -251,6 +254,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
               size: 15,
             ),
           ),
+          ListTile(
+            onTap: () {
+              showModalBottomSheet(
+                isScrollControlled: true,
+                context: context,
+                builder: (context) {
+                  return CustomModal();
+                },
+              );
+            },
+            leading: Icon(Icons.lock),
+            title: Text('Get Feeding india receipt'),
+            trailing: Icon(
+              Icons.arrow_forward_ios_rounded,
+              size: 15,
+            ),
+          ),
           InkWell(
             onTap: () {
               Navigator.push(
@@ -266,6 +286,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Icons.arrow_forward_ios_rounded,
                 size: 15,
               ),
+            ),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Notificationpreferences(),
+                  ));
+            },
+            leading: Icon(Icons.notifications),
+            title: Text('Notification preferences'),
+            trailing: Icon(
+              Icons.arrow_forward_ios_rounded,
+              size: 15,
             ),
           ),
           InkWell(

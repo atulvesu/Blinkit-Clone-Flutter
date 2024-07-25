@@ -6,7 +6,6 @@ package="com.example.blinkit"
 
     <application
         android:label="blinkit"
-       
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -17,6 +16,7 @@ package="com.example.blinkit"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
             android:windowSoftInputMode="adjustResize">
+           
             <!-- Specifies an Android theme to apply to this Activity as soon as
                  the Android process has started. This theme is visible to the user
                  while the Flutter UI initializes. After that, this theme continues
@@ -30,6 +30,7 @@ package="com.example.blinkit"
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name="com.razorpay.CheckoutActivity"/>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data

@@ -135,3 +135,9 @@ const card5 =
 
 const card6 =
     TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.w900);
+
+const textfield =
+    TextStyle(color: Colors.grey, fontSize: 12, fontWeight: FontWeight.w200);
+
+final secondOne =
+    TextStyle(fontSize: Dimensions.fontSize(12), fontWeight: FontWeight.w200);
