@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:blinkit/style/const.dart';
 import 'package:flutter/material.dart';
 
@@ -17,17 +19,18 @@ class _CustomModalState extends State<CustomModal> {
     return Form(
       key: _formKey,
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         width: double.infinity,
         child: Container(
+          // ignore: use_full_hex_values_for_flutter_colors
           color: const Color(0xff00ffffff),
           child: SingleChildScrollView(
             child: Column(
               // mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 12),
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 12),
                   child: Text(
                     'Feeding India Donation Receipt',
                     style: card6,
@@ -37,11 +40,11 @@ class _CustomModalState extends State<CustomModal> {
                   'Please enter your details',
                   style: bstSellerStyle,
                 ),
-                Text(
+                const Text(
                   'The details are collected on behalf of Feeding India for the purpose of issuance of Form 10BE (\'Donation Certificate) required by you for claiming deduction under section 80G of Income Tax Act 1961. Donation Certificate shall be issued at the end of the relevant financial year, within the stipulated time as may be prescribed under applicable laws Please refer to the link: https://www.feedingindia.org/terms/donor for detailed terms & conditions and timelines for issuance of Donation Certificates.',
                   style: card4,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 TextFormField(
@@ -56,13 +59,15 @@ class _CustomModalState extends State<CustomModal> {
                     hintText: 'Enter PAN card number',
                     hintStyle: textfield,
                   ),
+                  // ignore: non_constant_identifier_names
                   validator: (PAN) {
                     if (PAN == null || PAN.isEmpty) {
                       return "Pan can't be empty";
                     }
+                    return null;
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 TextFormField(
@@ -81,9 +86,10 @@ class _CustomModalState extends State<CustomModal> {
                     if (value == null || value.isEmpty) {
                       return "Please enter an email";
                     }
+                    return null;
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 InkWell(
@@ -93,11 +99,11 @@ class _CustomModalState extends State<CustomModal> {
                     }
                   },
                   child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
                     decoration: BoxDecoration(
                         color: Colors.grey.shade200,
                         borderRadius: BorderRadius.circular(5)),
-                    child: Center(child: Text('Submit')),
+                    child: const Center(child: Text('Submit')),
                   ),
                 )
               ],

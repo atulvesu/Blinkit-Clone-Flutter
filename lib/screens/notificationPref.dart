@@ -1,3 +1,6 @@
+// ignore: unused_import
+// ignore_for_file: file_names, unused_import, duplicate_ignore
+
 import 'package:blinkit/screens/homeScreen2.dart';
 import 'package:blinkit/style/const.dart';
 import 'package:blinkit/widgets/appBarWidget.dart';
@@ -28,7 +31,7 @@ class _NotificationpreferencesState extends State<Notificationpreferences> {
               color: Colors.white,
               child: ListTile(
                 leading: Image.asset('assets/images/WhatsApp_icon.png'),
-                title: Text(
+                title: const Text(
                   'Promos and offer',
                   style: card5,
                 ),
@@ -42,14 +45,14 @@ class _NotificationpreferencesState extends State<Notificationpreferences> {
                     setState(() {
                       _switchValue = value;
                       var snackdemo = SnackBar(
-                        content: Text(
+                        content: const Text(
                             'Notification preferences updated successfully'),
                         backgroundColor: Colors.green,
                         elevation: 10,
                         behavior: SnackBarBehavior.floating,
-                        margin: EdgeInsets.all(40),
+                        margin: const EdgeInsets.all(40),
                         shape: RoundedRectangleBorder(
-                          side: BorderSide(width: 0.2),
+                          side: const BorderSide(width: 0.2),
                           borderRadius: BorderRadius.circular(50),
                         ),
                       );
